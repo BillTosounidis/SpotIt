@@ -8,10 +8,9 @@ import android.os.SystemClock;
  */
 
 public class SleepOnStart extends Application {
-
     @Override
     public void onCreate() {
         super.onCreate();
-        SystemClock.sleep(2000);
+        SystemClock.sleep(4000);
     }
 }
