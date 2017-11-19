@@ -11,6 +11,6 @@ public class SleepOnStart extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SystemClock.sleep(4000);
+        SystemClock.sleep(1000);
     }
 }

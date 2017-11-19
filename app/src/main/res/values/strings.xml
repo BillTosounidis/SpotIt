@@ -6,4 +6,6 @@
     <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="login">Log In</string>
+    <string name="songtitle">Song title</string>
+    <string name="search_for_similar_songs">Search for similar songs</string>
 </resources>
