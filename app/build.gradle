@@ -27,5 +27,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    compile('se.michaelthelin.spotify:spotify-web-api-java:1.5.0') {
+        exclude group: "commons-beanutils", module: "commons-beanutils"
+    }
+    compile 'commons-beanutils:commons-beanutils:20030211.134440'
     compile 'com.android.support:design:26.1.0'
+    compile "com.android.support:support-v4:26.1.0"
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.daimajia.slider:library:1.1.5@aar'
+    compile 'de.u-mass:lastfm-java:0.1.2'
 }

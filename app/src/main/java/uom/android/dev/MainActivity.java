@@ -11,10 +11,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private SliderLayout sliderShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
@@ -33,6 +41,21 @@ public class MainActivity extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(nvDrawer);
+
+        sliderShow = (SliderLayout) findViewById(R.id.slider);
+        TextSliderView textSliderView = new TextSliderView(this);
+        textSliderView
+                .description("Trap Nation")
+                .image("https://s-media-cache-ak0.pinimg.com/originals/b5/00/17/b500170127c1bbaa9bf0c3ae7c23d2b8.jpg");
+
+        sliderShow.addSlider(textSliderView);
+
+    }
+
+    @Override
+    protected void onStop() {
+        sliderShow.stopAutoCycle();
+        super.onStop();
     }
 
     public void selectItemDrawer(MenuItem menuItem){

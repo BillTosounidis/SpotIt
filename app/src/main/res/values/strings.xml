@@ -9,4 +9,6 @@
     <string name="songtitle">Song title</string>
     <string name="search_for_similar_songs">Search for similar songs</string>
     <string name="top_tracks_today">Top Tracks Today</string>
+    <string name="home">HOME</string>
+    <string name="songs_you_might_like">Songs you might like</string>
 </resources>
