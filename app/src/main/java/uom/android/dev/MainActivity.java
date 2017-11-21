@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
@@ -48,7 +49,13 @@ public class MainActivity extends AppCompatActivity {
                 .description("Trap Nation")
                 .image("https://s-media-cache-ak0.pinimg.com/originals/b5/00/17/b500170127c1bbaa9bf0c3ae7c23d2b8.jpg");
 
+        TextSliderView textSliderView1 = new TextSliderView(this);
+        textSliderView1
+                .description("Jason Derulo")
+                .image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuZ-YqSLD1MmsKII3niveLkpCMFfBIZL51KXeUn-v9jTeuKTjx");
+
         sliderShow.addSlider(textSliderView);
+        sliderShow.addSlider(textSliderView1);
 
     }
 
