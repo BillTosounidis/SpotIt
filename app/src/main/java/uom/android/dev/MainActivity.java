@@ -1,5 +1,6 @@
 package uom.android.dev;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -67,18 +68,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectItemDrawer(MenuItem menuItem){
         Fragment myFragment = null;
-        Class fragmentClass;
+        Class fragmentClass = null;
         switch (menuItem.getItemId()){
             case R.id.search:
-                fragmentClass = Settings.class;
+                Intent i = new Intent(MainActivity.this, SearchActivity.class);
+                startActivity(i);
                 break;
-            case R.id.about:
-                fragmentClass = About.class;
-                break;
-            default:
-                fragmentClass = Settings.class;
         }
-        try{
+       /* try{
             myFragment = (Fragment) fragmentClass.newInstance();
         }
         catch (Exception e){
@@ -88,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.drawer, myFragment).commit();
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
-        mDrawerLayout.closeDrawers();
+        mDrawerLayout.closeDrawers();*/
     }
 
     @Override
@@ -100,8 +97,16 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                selectItemDrawer(item);
-                return true;
+                int id = item.getItemId();
+
+                switch (id){
+                    case R.id.search:
+                        Intent i = new Intent(MainActivity.this, SearchActivity.class);
+                        startActivity(i);
+                        break;
+                }
+
+                return false;
             }
         });
     }
