@@ -5,12 +5,12 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uom.android.dev.MainActivity">
+    tools:context="uom.android.dev.MainActivity"
+    android:background="@drawable/background">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background">
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_toolbar"

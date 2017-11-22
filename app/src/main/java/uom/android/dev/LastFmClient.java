@@ -13,6 +13,6 @@ import retrofit2.http.Query;
 
 public interface LastFmClient {
 
-    @GET("http://ws.audioscrobbler.com/2.0/?method=track.search&track={songTitle}&api_key=d22eee316a280d357babf1f7b1e56205&format=json")
-    Call<List<MatchSongSearch>> findSong(@Path("songTitle") String songTitle);
+    @GET("?method=track.search&format=json")
+    Call<List<MatchSongSearch>> findSong(@Query("track") String songTitle);
 }
