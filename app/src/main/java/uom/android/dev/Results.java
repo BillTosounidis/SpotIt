@@ -3,8 +3,6 @@ package uom.android.dev;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.w3c.dom.Attr;
-
 public class Results {
 
     @SerializedName("opensearch:Query")

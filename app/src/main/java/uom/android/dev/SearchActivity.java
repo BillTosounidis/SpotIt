@@ -65,15 +65,14 @@ public class SearchActivity extends AppCompatActivity {
         Retrofit retrofit = builder.build();
 
         LastFmClient client = retrofit.create(LastFmClient.class);
-        Call<Results> call = client.getResults("voodoo people");
+        Call<JsonResponse> call = client.getResults("voodoo people");
 
-        call.enqueue(new Callback<Results>() {
+        call.enqueue(new Callback<JsonResponse>() {
             @Override
-            public void onResponse(@NonNull Call<Results> call, @NonNull Response<Results> response) {
+            public void onResponse(@NonNull Call<JsonResponse> call, @NonNull Response<JsonResponse> response) {
 
                 if(response.isSuccessful()){
-                    Results result = response.body();
-                    assert result != null;
+                    Results result = response.body().getResults();
                     TrackMatches trackMatches = result.getTrackmatches();
                     List<Track> tracks = trackMatches.getTrack();
                     SearchResultsAdapter searchAdapter = new SearchResultsAdapter(SearchActivity.this,  tracks);
@@ -85,7 +84,7 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Results> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<JsonResponse> call, @NonNull Throwable t) {
                 Toast.makeText(SearchActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
