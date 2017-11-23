@@ -18,12 +18,12 @@ import uom.android.dev.LastFmJson.Track;
  * Created by vasil on 22-Nov-17.
  */
 
-public class SearchResultsAdapter extends ArrayAdapter<Track> {
+public class TrackResultsAdapter extends ArrayAdapter<Track> {
 
     private Context context;
     private List<Track> values;
 
-    public SearchResultsAdapter(Context context, List<Track> values){
+    public TrackResultsAdapter(Context context, List<Track> values){
         super(context, R.layout.list_item_pagination, values);
 
         this.context = context;

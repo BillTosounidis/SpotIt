@@ -108,7 +108,7 @@ public class SearchActivity extends AppCompatActivity {
                     assert result!=null;
                     TrackMatches trackMatches = result.getTrackmatches();
                     List<Track> tracks = trackMatches.getTrack();
-                    SearchResultsAdapter searchAdapter = new SearchResultsAdapter(SearchActivity.this,  tracks);
+                    TrackResultsAdapter searchAdapter = new TrackResultsAdapter(SearchActivity.this,  tracks);
                     listView.setAdapter(searchAdapter);
                 }
                 else {
