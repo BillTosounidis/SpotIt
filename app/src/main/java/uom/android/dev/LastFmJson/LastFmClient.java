@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.LastFmJson;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

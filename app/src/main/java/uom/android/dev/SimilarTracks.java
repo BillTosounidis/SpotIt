@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 import org.w3c.dom.Attr;
 
+import uom.android.dev.LastFmJson.Track;
+
 public class SimilarTracks {
 
     @SerializedName("track")

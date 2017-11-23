@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.LastFmJson;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

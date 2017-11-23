@@ -5,11 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +19,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import uom.android.dev.LastFmJson.JsonResponse;
+import uom.android.dev.LastFmJson.LastFmClient;
+import uom.android.dev.LastFmJson.Results;
+import uom.android.dev.LastFmJson.Track;
+import uom.android.dev.LastFmJson.TrackMatches;
 
 public class SearchActivity extends AppCompatActivity {
 

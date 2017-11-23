@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import uom.android.dev.LastFmJson.Track;
+
 /**
  * Created by vasil on 22-Nov-17.
  */
