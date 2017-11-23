@@ -4,16 +4,11 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.w3c.dom.Attr;
-
-public class SimilarTracks {
+public class TrackMatches {
 
     @SerializedName("track")
     @Expose
     private List<Track> track = null;
-    @SerializedName("@attr")
-    @Expose
-    private Attr attr;
 
     public List<Track> getTrack() {
         return track;
@@ -21,14 +16,6 @@ public class SimilarTracks {
 
     public void setTrack(List<Track> track) {
         this.track = track;
-    }
-
-    public Attr getAttr() {
-        return attr;
-    }
-
-    public void setAttr(Attr attr) {
-        this.attr = attr;
     }
 
 }
