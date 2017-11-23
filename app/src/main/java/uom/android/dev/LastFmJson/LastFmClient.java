@@ -11,5 +11,12 @@ import retrofit2.http.Query;
 public interface LastFmClient {
 
     @GET("?method=track.search&format=json")
-    Call<JsonResponse> getResults(@Query("track") String songTitle);
+    Call<JsonResponse> searchTrack(@Query("track") String songTitle);
+
+    @GET("?method=track.getsimilar&format=json")
+    Call<JsonResponse> similarTracksMbid(@Query("mbid") String trackMbid);
+
+    @GET("?method=trac.getsimilar&format=json")
+    Call<JsonResponse> similarTracks(@Query("artist") String artistName,
+                                     @Query("track") String songTitle);
 }

@@ -68,7 +68,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
 
-        <SearchView
+        <android.support.v7.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="0dp"
             android:layout_height="46dp"
@@ -76,12 +76,11 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/search_bar"
-            android:queryHint="Song title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
-        </SearchView>
+        </android.support.v7.widget.SearchView>
 
         <TextView
             android:id="@+id/textView2"

@@ -11,4 +11,6 @@
     <string name="top_tracks_today">Top Tracks Today</string>
     <string name="home">HOME</string>
     <string name="songs_you_might_like">Songs you might like</string>
+    <string name="song_title_hint">Song Title</string>
+    <string name="app_label">Spot it!</string>
 </resources>

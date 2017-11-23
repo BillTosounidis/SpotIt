@@ -1,5 +1,8 @@
 package uom.android.dev;
 
+import android.app.SearchManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.daimajia.slider.library.SliderLayout;
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private SliderLayout sliderShow;
+    private SearchView search;
+    public static final String EXTRA_MESSAGE = "uom.android.dev.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,30 @@ public class MainActivity extends AppCompatActivity {
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        search = findViewById(R.id.searchView);
+        search.setSearchableInfo(searchManager.getSearchableInfo(
+                new ComponentName(this, SearchActivity.class)));
 
+        final SearchView.OnQueryTextListener queryTextListener = new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.setAction(Intent.ACTION_SEARCH);
+                intent.putExtra(EXTRA_MESSAGE, query);
+                startActivity(intent);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return true;
+
+            }
+        };
+        search.setOnQueryTextListener(queryTextListener);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
@@ -66,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public void selectItemDrawer(MenuItem menuItem){
+    /*public void selectItemDrawer(MenuItem menuItem){
         Fragment myFragment = null;
         Class fragmentClass = null;
         switch (menuItem.getItemId()){
@@ -75,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
         }
-       /* try{
+       *//* try{
             myFragment = (Fragment) fragmentClass.newInstance();
         }
         catch (Exception e){
@@ -85,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction().replace(R.id.drawer, myFragment).commit();
         menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
-        mDrawerLayout.closeDrawers();*/
-    }
+        mDrawerLayout.closeDrawers();*//*
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

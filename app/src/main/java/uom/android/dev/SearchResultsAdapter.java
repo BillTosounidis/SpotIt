@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.Track;
 
 /**
@@ -38,10 +41,20 @@ public class SearchResultsAdapter extends ArrayAdapter<Track> {
         }
 
         TextView textView = (TextView) row.findViewById(R.id.list_item_pagination_text);
-
+        //ImageView imageView = (ImageView) row.findViewById(R.id.list_item_pagination_image);
         Track item = values.get(position);
         String message = item.getName();
-        textView.setText(message);
+        ArrayList<Image> images = new ArrayList<>();
+
+        for(Image image_results : item.getImage()){
+            Image image = new Image(
+                    image_results.getText(),
+                    image_results.getSize(),
+                    image_results.getAdditionalProperties());
+            images.add(image);
+        }
+        textView.setText(item.getName() + " - " + item.getArtist());
+        //imageView.setBackground(images.get(0));
 
         return row;
     }
