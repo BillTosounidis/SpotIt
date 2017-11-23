@@ -1,4 +1,3 @@
-
 package uom.android.dev;
 
 import com.google.gson.annotations.Expose;
