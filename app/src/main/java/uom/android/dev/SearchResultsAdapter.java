@@ -13,12 +13,12 @@ import java.util.List;
  * Created by vasil on 22-Nov-17.
  */
 
-public class SearchResultsAdapter extends ArrayAdapter<MatchSongSearch> {
+public class SearchResultsAdapter extends ArrayAdapter<Track> {
 
     private Context context;
-    private List<MatchSongSearch> values;
+    private List<Track> values;
 
-    public SearchResultsAdapter(Context context, List<MatchSongSearch> values){
+    public SearchResultsAdapter(Context context, List<Track> values){
         super(context, R.layout.list_item_pagination, values);
 
         this.context = context;
@@ -37,8 +37,8 @@ public class SearchResultsAdapter extends ArrayAdapter<MatchSongSearch> {
 
         TextView textView = (TextView) row.findViewById(R.id.list_item_pagination_text);
 
-        MatchSongSearch item = values.get(position);
-        String message = item.getSongTitle();
+        Track item = values.get(position);
+        String message = item.getName();
         textView.setText(message);
 
         return row;

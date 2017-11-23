@@ -1,5 +1,6 @@
 package uom.android.dev;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -63,18 +65,27 @@ public class SearchActivity extends AppCompatActivity {
         Retrofit retrofit = builder.build();
 
         LastFmClient client = retrofit.create(LastFmClient.class);
-        Call<List<MatchSongSearch>> call = client.findSong("believe");
+        Call<Results> call = client.getResults("voodoo people");
 
-        call.enqueue(new Callback<List<MatchSongSearch>>() {
+        call.enqueue(new Callback<Results>() {
             @Override
-            public void onResponse(Call<List<MatchSongSearch>> call, Response<List<MatchSongSearch>> response) {
-                List<MatchSongSearch> songs = response.body();
-                SearchResultsAdapter searchAdapter = new SearchResultsAdapter(SearchActivity.this,  songs);
-                listView.setAdapter(searchAdapter);
+            public void onResponse(@NonNull Call<Results> call, @NonNull Response<Results> response) {
+
+                if(response.isSuccessful()){
+                    Results result = response.body();
+                    assert result != null;
+                    TrackMatches trackMatches = result.getTrackmatches();
+                    List<Track> tracks = trackMatches.getTrack();
+                    SearchResultsAdapter searchAdapter = new SearchResultsAdapter(SearchActivity.this,  tracks);
+                    listView.setAdapter(searchAdapter);
+                }
+                else {
+                    Log.d("Response error", String.valueOf(response.errorBody()));
+                }
             }
 
             @Override
-            public void onFailure(Call<List<MatchSongSearch>> call, Throwable t) {
+            public void onFailure(@NonNull Call<Results> call, @NonNull Throwable t) {
                 Toast.makeText(SearchActivity.this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
