@@ -67,8 +67,6 @@ public class SearchActivity extends AppCompatActivity {
 
     protected void searchForQuery(){
 
-        final String apikey = "d22eee316a280d357babf1f7b1e56205";
-
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(new Interceptor() {
                     @Override
@@ -77,7 +75,7 @@ public class SearchActivity extends AppCompatActivity {
                         HttpUrl httpUrl = original.url();
 
                         HttpUrl newhttpUrl = httpUrl.newBuilder()
-                                .addQueryParameter("api_key", apikey).build();
+                                .addQueryParameter("api_key",BuildConfig.LAST_FM_API_KEY).build();
 
                         Request.Builder requestBuilder = original.newBuilder().url(newhttpUrl);
 
@@ -90,7 +88,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl("http://ws.audioscrobbler.com/2.0/")
+                .baseUrl(BuildConfig.LAST_FM_BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
 
