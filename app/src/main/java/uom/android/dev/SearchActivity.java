@@ -3,37 +3,26 @@ package uom.android.dev;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.List;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
-import okhttp3.HttpUrl;
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-import uom.android.dev.LastFmJson.JsonResponse;
-import uom.android.dev.LastFmJson.LastFmClient;
-import uom.android.dev.LastFmJson.Results;
-import uom.android.dev.LastFmJson.Track;
-import uom.android.dev.LastFmJson.TrackMatches;
+import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity {
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import uom.android.dev.LastFmJson.Image;
+import uom.android.dev.LastFmJson.ResultsData;
+import uom.android.dev.LastFmJson.TrackSearch;
 
-    private ListView listView;
+public class SearchActivity extends AppCompatActivity implements SongListFragment.OnFragmentInteractionListener{
+
     private String searchQuery;
 
     @Override
@@ -41,14 +30,10 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        listView = (ListView) findViewById(R.id.resultsListView);
-
         Intent intent = getIntent();
-        String what = intent.getAction();
-        if(Intent.ACTION_SEARCH.equals(intent.getAction())){
-            searchQuery = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-            searchForQuery();
-        }
+        searchQuery = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        searchTracks(searchQuery);
+
     }
 
     @Override
@@ -65,59 +50,71 @@ public class SearchActivity extends AppCompatActivity {
         return true;
     }
 
-    protected void searchForQuery(){
+    public void searchTracks(String query){
+        final LastFMSearchService lastfmService = new LastFMSearchService();
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new Interceptor() {
+        lastfmService
+                .lastfmclient.searchTrack(query)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResultsData>() {
+
+                    SongListFragment songListFragment;
+
                     @Override
-                    public okhttp3.Response intercept(Chain chain) throws IOException {
-                        Request original = chain.request();
-                        HttpUrl httpUrl = original.url();
-
-                        HttpUrl newhttpUrl = httpUrl.newBuilder()
-                                .addQueryParameter("api_key",BuildConfig.LAST_FM_API_KEY).build();
-
-                        Request.Builder requestBuilder = original.newBuilder().url(newhttpUrl);
-
-                        Request request = requestBuilder.build();
-
-                        return chain.proceed(request);
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
                     }
-                })
-                .build();
 
+                    @Override
+                    public void onNext(ResultsData resultsData) {
+                        ArrayList<TrackSearch> tracks = new ArrayList<>();
 
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(BuildConfig.LAST_FM_BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create());
+                        for (TrackSearch trck: resultsData.getResults().getTrackmatches().getTrack()){
 
-        Retrofit retrofit = builder.build();
+                            ArrayList<Image> images = new ArrayList<>();
+                            for(Image img : trck.getImage()){
+                                Image image = new Image(
+                                        img.getText(),
+                                        img.getSize());
+                                images.add(image);
+                            }
 
-        LastFmClient client = retrofit.create(LastFmClient.class);
-        Call<JsonResponse> call = client.searchTrack(searchQuery);
+                            TrackSearch track = new TrackSearch(
+                                    trck.getName(),
+                                    trck.getUrl(),
+                                    trck.getStreamable(),
+                                    trck.getListeners(),
+                                    images,
+                                    trck.getMbid(),
+                                    trck.getmArtist());
+                            tracks.add(track);
+                        }
 
-        call.enqueue(new Callback<JsonResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<JsonResponse> call, @NonNull Response<JsonResponse> response) {
+                        songListFragment = SongListFragment.newInstance(tracks);
+                    }
 
-                if(response.isSuccessful()){
-                    Results result = response.body().getResults();
-                    assert result!=null;
-                    TrackMatches trackMatches = result.getTrackmatches();
-                    List<Track> tracks = trackMatches.getTrack();
-                    TrackResultsAdapter searchAdapter = new TrackResultsAdapter(SearchActivity.this,  tracks);
-                    listView.setAdapter(searchAdapter);
-                }
-                else {
-                    Log.d("Response error", String.valueOf(response.errorBody()));
-                }
-            }
+                    @Override
+                    public void onError(Throwable t) {
+                        Toast.makeText(getApplicationContext(),
+                                "API Call Error", Toast.LENGTH_SHORT).show();
+                    }
 
-            @Override
-            public void onFailure(@NonNull Call<JsonResponse> call, @NonNull Throwable t) {
-                Toast.makeText(SearchActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onComplete() {
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.fragment_container, songListFragment, "SFTAG")
+                                .commit();
+                    }
+                });
+    }
+
+    @Override
+    public void onItemSelected(TrackSearch track) {
+        Intent intent = new Intent(this, SimilarTracksActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("mbid", track);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

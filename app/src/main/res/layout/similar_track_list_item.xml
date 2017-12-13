@@ -1,54 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="10dp"
-    android:baselineAligned="false"
-    android:gravity="center_vertical"
     android:minHeight="?attr/listPreferredItemHeight"
-    android:orientation="horizontal">
+    android:gravity="center_vertical"
+    android:baselineAligned="false">
 
     <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1">
-
         <ImageView
-            android:id="@+id/track_image_imageview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:adjustViewBounds="false"
+            android:id="@+id/track_image_imageview"
             tools:ignore="ContentDescription" />
     </FrameLayout>
-
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
         android:layout_weight="4"
         android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
-
         <TextView
-            android:id="@+id/track_title_textview"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:fontFamily="@font/open_sans_semibold"
-            android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@color/white" />
-
+            android:textAppearance="?android:textAppearanceLarge"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="bold"
+            android:id="@+id/track_name_textview"/>
         <TextView
-            android:id="@+id/track_listeners_textview"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:fontFamily="@font/open_sans_light"
-            android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:textColor="@color/white" />
+            android:textAppearance="?android:textAppearanceLarge"
+            android:fontFamily="sans-serif-light"
+            android:textStyle="italic"
+            android:id="@+id/track_match_textview"/>
     </LinearLayout>
 
 </LinearLayout>

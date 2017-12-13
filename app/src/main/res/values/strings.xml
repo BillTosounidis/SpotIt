@@ -13,4 +13,7 @@
     <string name="songs_you_might_like">Songs you might like</string>
     <string name="song_title_hint">Song Title</string>
     <string name="app_label">Spot it!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

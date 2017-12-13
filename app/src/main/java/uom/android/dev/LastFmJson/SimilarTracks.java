@@ -1,27 +1,23 @@
-package uom.android.dev;
+package uom.android.dev.LastFmJson;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.w3c.dom.Attr;
-
-import uom.android.dev.LastFmJson.Track;
-
 public class SimilarTracks {
 
     @SerializedName("track")
     @Expose
-    private List<Track> track = null;
+    private List<TrackSimilar> track = null;
     @SerializedName("@attr")
     @Expose
     private Attr attr;
 
-    public List<Track> getTrack() {
+    public List<TrackSimilar> getTrack() {
         return track;
     }
 
-    public void setTrack(List<Track> track) {
+    public void setTrack(List<TrackSimilar> track) {
         this.track = track;
     }
 
