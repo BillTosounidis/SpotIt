@@ -5,10 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Results {
 
-    @SerializedName("opensearch:Query")
-    @Expose
-    private OpensearchQuery opensearchQuery;
-    @SerializedName("opensearch:totalResults")
     @Expose
     private String opensearchTotalResults;
     @SerializedName("opensearch:startIndex")
@@ -20,17 +16,7 @@ public class Results {
     @SerializedName("trackmatches")
     @Expose
     private TrackMatches trackmatches;
-    @SerializedName("@attr")
-    @Expose
-    private Attr attr;
 
-    public OpensearchQuery getOpensearchQuery() {
-        return opensearchQuery;
-    }
-
-    public void setOpensearchQuery(OpensearchQuery opensearchQuery) {
-        this.opensearchQuery = opensearchQuery;
-    }
 
     public String getOpensearchTotalResults() {
         return opensearchTotalResults;
@@ -62,14 +48,6 @@ public class Results {
 
     public void setTrackmatches(TrackMatches trackmatches) {
         this.trackmatches = trackmatches;
-    }
-
-    public Attr getAttr() {
-        return attr;
-    }
-
-    public void setAttr(Attr attr) {
-        this.attr = attr;
     }
 
 }

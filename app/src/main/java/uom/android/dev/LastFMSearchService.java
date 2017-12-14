@@ -12,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.LastFmClient;
 import uom.android.dev.LastFmJson.SimilarTracksData;
-import uom.android.dev.LastFmJson.Track;
 import uom.android.dev.LastFmJson.TrackSimilar;
 
 /**
@@ -40,6 +39,9 @@ public class LastFMSearchService {
         lastfmclient = retrofit.create(LastFmClient.class);
     }
 
+    // This method makes a call to the api using the unique "mbid" identifier that was returned by
+    // the selection of a track onscreen from the user. It fetches the similar tracks and returns
+    // the List.
     public Flowable<List<TrackSimilar>> getSimilarTracks(final String mbid){
 
         // This returns an observable object that is a list with the results we wanted.
@@ -75,7 +77,6 @@ public class LastFMSearchService {
                                     trackData.getName(),
                                     trackData.getmArtist(),
                                     trackData.getUrl(),
-                                    trackData.getStreamable(),
                                     trackData.getListeners(),
                                     trackImages,
                                     trackData.getMbid(),
@@ -89,6 +90,8 @@ public class LastFMSearchService {
                 });
     }
 
+    // We need this because sometimes the API returns a null "mbid" identifier value,
+    // so we need to search using the artist and the track title.
     public Flowable<List<TrackSimilar>> getSimilarTracks(final String artist, final String track){
 
         // This returns an observable object that is a list with the results we wanted.
@@ -124,7 +127,6 @@ public class LastFMSearchService {
                                     trackData.getName(),
                                     trackData.getmArtist(),
                                     trackData.getUrl(),
-                                    trackData.getStreamable(),
                                     trackData.getListeners(),
                                     trackImages,
                                     trackData.getMbid(),

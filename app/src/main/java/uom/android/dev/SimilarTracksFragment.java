@@ -93,9 +93,9 @@ public class SimilarTracksFragment extends Fragment {
         String mbid = selectedTrack.getMbid();
         String artist = selectedTrack.getmArtist();
         String track = selectedTrack.getName();
-        // Instantiate an ArtistSearchService.
+
         searchService = new LastFMSearchService();
-        // Instantiate an Observable by calling the appropriate method.
+
         Flowable<List<TrackSimilar>> fetchDataObservable = null;
         if(!mbid.equals("")) {
             fetchDataObservable = searchService.getSimilarTracks(mbid);
@@ -104,7 +104,7 @@ public class SimilarTracksFragment extends Fragment {
             fetchDataObservable = searchService.getSimilarTracks(artist, track);
         }
 
-        // Add the observable.
+
         mCompositeSubscription.add(fetchDataObservable
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())

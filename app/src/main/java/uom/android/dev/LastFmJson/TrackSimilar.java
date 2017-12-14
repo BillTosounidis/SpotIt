@@ -20,9 +20,6 @@ public class TrackSimilar extends Track{
     @SerializedName("match")
     @Expose
     private Float match;
-    @SerializedName("streamable")
-    @Expose
-    private Streamable streamable;
 
     @SerializedName("playcount")
     @Expose
@@ -33,13 +30,12 @@ public class TrackSimilar extends Track{
     }
 
     public TrackSimilar(String name, Artist mArtist, String url,
-                        Streamable streamable, String listeners,
+                        String listeners,
                         List<Image> image, String mbid,
                         Float match, Integer mPlaycount){
         super(name, url, listeners, image, mbid);
         this.mArtist = mArtist;
         this.match = match;
-        this.streamable = streamable;
         this.mPlaycount = mPlaycount;
     }
 
@@ -88,14 +84,6 @@ public class TrackSimilar extends Track{
     }
 
     public void setMatch(Float match){ this.match = match; }
-
-    public Streamable getStreamable() {
-        return streamable;
-    }
-
-    public void setStreamable(Streamable streamable) {
-        this.streamable = streamable;
-    }
 
     public Integer getmPlaycount() {
         return mPlaycount;
