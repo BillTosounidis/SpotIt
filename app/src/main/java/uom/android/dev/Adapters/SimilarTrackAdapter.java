@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -17,6 +17,7 @@ import java.util.List;
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.Track;
 import uom.android.dev.LastFmJson.TrackSimilar;
+import uom.android.dev.R;
 
 /**
  * Created by joanna on 03/08/16.

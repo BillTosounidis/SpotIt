@@ -83,7 +83,6 @@ public class SearchActivity extends AppCompatActivity implements SongListFragmen
                             TrackSearch track = new TrackSearch(
                                     trck.getName(),
                                     trck.getUrl(),
-                                    trck.getStreamable(),
                                     trck.getListeners(),
                                     images,
                                     trck.getMbid(),

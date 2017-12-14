@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
+import uom.android.dev.Adapters.TrackResultsAdapter;
 import uom.android.dev.LastFmJson.TrackSearch;
 
 /**

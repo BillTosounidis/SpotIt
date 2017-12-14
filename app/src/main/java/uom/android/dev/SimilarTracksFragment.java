@@ -1,6 +1,5 @@
 package uom.android.dev;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,12 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -25,10 +19,9 @@ import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.internal.subscriptions.ArrayCompositeSubscription;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
+import uom.android.dev.Adapters.SimilarTrackAdapter;
 import uom.android.dev.LastFmJson.Track;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.LastFmJson.TrackSimilar;

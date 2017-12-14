@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,8 +15,8 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import uom.android.dev.LastFmJson.Image;
-import uom.android.dev.LastFmJson.Track;
 import uom.android.dev.LastFmJson.TrackSearch;
+import uom.android.dev.R;
 
 /**
  * Created by vasil on 22-Nov-17.
