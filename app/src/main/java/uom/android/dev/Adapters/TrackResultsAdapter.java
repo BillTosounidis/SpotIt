@@ -79,7 +79,7 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
             holder.track_image.setImageResource(R.drawable.ic_info_white_24px);
         }
 
-        holder.track_title.setText(track.getName());
+        holder.track_title.setText(track.getName() + " - " + track.getmArtist());
         holder.track_image.setContentDescription(track.getName());
 
         holder.total_listeners.setText(track.getListeners());

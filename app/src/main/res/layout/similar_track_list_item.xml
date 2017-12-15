@@ -4,6 +4,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="10dp"
     android:minHeight="?attr/listPreferredItemHeight"
     android:gravity="center_vertical"
     android:baselineAligned="false">
@@ -27,20 +29,20 @@
         android:layout_gravity="center_horizontal"
         android:paddingLeft="16dp"
         android:paddingRight="16dp">
+
         <TextView
+            android:id="@+id/track_name_textview"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:fontFamily="sans-serif-light"
-            android:textStyle="bold"
-            android:id="@+id/track_name_textview"/>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_semibold"
+            android:textAppearance="@android:style/TextAppearance.Material.Large" />
+
         <TextView
+            android:id="@+id/track_match_textview"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:fontFamily="sans-serif-light"
-            android:textStyle="italic"
-            android:id="@+id/track_match_textview"/>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_light"
+            android:textAppearance="@android:style/TextAppearance.Material.Large" />
     </LinearLayout>
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
 
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.Track;
@@ -23,19 +24,19 @@ import uom.android.dev.R;
  * Created by joanna on 03/08/16.
  * Simple Adapter for Recycler View that contains the similar artist search results.
  */
-public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapter.ArtistViewHolder> {
+public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapter.TrackViewHolder> {
     private final Context mContext;
     private List<TrackSimilar> trackList;
     private final OnItemClickListener listener;
     private final OnItemLongClickListener listenerlong;
 
-    public class ArtistViewHolder extends RecyclerView.ViewHolder {
+    public class TrackViewHolder extends RecyclerView.ViewHolder {
         final ImageView track_image;
         final TextView track_name;
         final TextView track_match;
         final LinearLayout item;
 
-        public ArtistViewHolder(View itemView) {
+        public TrackViewHolder(View itemView) {
             super(itemView);
             track_image = (ImageView) itemView.findViewById(R.id.track_image_imageview);
             track_name = (TextView) itemView.findViewById(R.id.track_name_textview);
@@ -53,19 +54,19 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
     }
 
     @Override
-    public ArtistViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TrackViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.
                 from(parent.getContext()).
                 inflate(R.layout.similar_track_list_item, parent, false);
 
-        return new ArtistViewHolder(itemView);
+        return new TrackViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ArtistViewHolder holder, int position) {
+    public void onBindViewHolder(TrackViewHolder holder, int position) {
         final TrackSimilar track = trackList.get(position);
         Uri image_uri = null;
-        final Uri artist_uri = (track.getUrl() != null)? Uri.parse(track.getUrl()): null ;
+        final Uri track_uri = (track.getUrl() != null)? Uri.parse(track.getUrl()): null ;
         
         List<Image> images = track.getImage();
         if (images.size() != 0 && !images.get(1).getText().equals("")) {
@@ -82,14 +83,14 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
             holder.track_image.setImageResource(R.drawable.ic_info_white_24px);
         }
         
-        holder.track_name.setText(track.getName());
+        holder.track_name.setText(track.getName() + " - " + track.getmArtist().getName());
         holder.track_image.setContentDescription(track.getName());
 
-        holder.track_match.setText(track.getMatch().toString());
+        holder.track_match.setText(String.format("%d", Math.round(track.getMatch()*100)) + "% Match");
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(artist_uri);
+                listener.onItemClick(track_uri);
             }
         });
         holder.item.setOnLongClickListener(new View.OnLongClickListener() {

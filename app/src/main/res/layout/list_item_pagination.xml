@@ -37,7 +37,7 @@
         <TextView
             android:id="@+id/track_title_textview"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
             android:textColor="@color/white" />
@@ -45,7 +45,7 @@
         <TextView
             android:id="@+id/track_listeners_textview"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_light"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
             android:textColor="@color/white" />
