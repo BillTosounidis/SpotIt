@@ -26,6 +26,7 @@ import uom.android.dev.LastFMSearchService;
 import uom.android.dev.LastFmJson.Track;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.LastFmJson.TopTrack;
+import uom.android.dev.LastFmJson.TrackSimilar;
 import uom.android.dev.R;
 import uom.android.dev.SimilarTracksActivity;
 
@@ -36,7 +37,7 @@ public class SimilarTracksFragment extends Fragment {
     private static final String LOG_TAG = SimilarTracksFragment.class.getSimpleName();
     private CompositeDisposable mCompositeSubscription;
     private LastFMSearchService searchService;
-    private List<TopTrack> mTracks;
+    private List<TrackSimilar> mTracks;
     private TrackSearch selectedTrack;
     RecyclerView resultsView;
     private SimilarTrackAdapter similarTrackAdapter;
@@ -92,7 +93,7 @@ public class SimilarTracksFragment extends Fragment {
 
         searchService = new LastFMSearchService();
 
-        Flowable<List<TopTrack>> fetchDataObservable = null;
+        Flowable<List<TrackSimilar>> fetchDataObservable = null;
         if(!mbid.equals("")) {
             fetchDataObservable = searchService.getSimilarTracks(mbid);
         }
@@ -105,10 +106,10 @@ public class SimilarTracksFragment extends Fragment {
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSubscriber<List<TopTrack>>() {
+                .subscribeWith(new DisposableSubscriber<List<TrackSimilar>>() {
 
                     @Override
-                    public void onNext(List<TopTrack> tracks) {
+                    public void onNext(List<TrackSimilar> tracks) {
 
                         mTracks = tracks;
                         similarTrackAdapter.setTrackList(tracks);

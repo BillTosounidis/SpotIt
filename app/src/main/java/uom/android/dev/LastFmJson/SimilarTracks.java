@@ -8,13 +8,13 @@ public class SimilarTracks {
 
     @SerializedName("track")
     @Expose
-    private List<TopTrack> track = null;
+    private List<TrackSimilar> track = null;
 
-    public List<TopTrack> getTrack() {
+    public List<TrackSimilar> getTrack() {
         return track;
     }
 
-    public void setTrack(List<TopTrack> track) {
+    public void setTrack(List<TrackSimilar> track) {
         this.track = track;
     }
 

@@ -13,6 +13,7 @@ import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.LastFmClient;
 import uom.android.dev.LastFmJson.SimilarTracksData;
 import uom.android.dev.LastFmJson.TopTrack;
+import uom.android.dev.LastFmJson.TrackSimilar;
 
 /**
  * Created by v4570 on 11/12/17.
@@ -44,7 +45,7 @@ public class LastFMSearchService {
     // This method makes a call to the api using the unique "mbid" identifier that was returned by
     // the selection of a track onscreen from the user. It fetches the similar tracks and returns
     // the List.
-    public Flowable<List<TopTrack>> getSimilarTracks(final String mbid){
+    public Flowable<List<TrackSimilar>> getSimilarTracks(final String mbid){
 
         // This returns an observable object that is a list with the results we wanted.
         // flatMap is a rxJava function that applies a function to the given element and returns
@@ -59,13 +60,13 @@ public class LastFMSearchService {
                             SimilarTracksData similarTracksData) throws Exception {
                         return similarTracksData.filterErrors();
                     }
-                }).map(new Function<SimilarTracksData, List<TopTrack>>() {
+                }).map(new Function<SimilarTracksData, List<TrackSimilar>>() {
 
                     @Override
-                    public List<TopTrack> apply(SimilarTracksData similarTracksData) throws Exception {
-                        final ArrayList<TopTrack> similarTracks = new ArrayList<>();
+                    public List<TrackSimilar> apply(SimilarTracksData similarTracksData) throws Exception {
+                        final ArrayList<TrackSimilar> similarTracks = new ArrayList<>();
 
-                        for (TopTrack trackData : similarTracksData.getSimilarTracks().getTrack()){
+                        for (TrackSimilar trackData : similarTracksData.getSimilarTracks().getTrack()){
 
                             ArrayList<Image> trackImages = new ArrayList<>();
 
@@ -75,7 +76,7 @@ public class LastFMSearchService {
                                         imageData.getSize());
                                 trackImages.add(image);
                             }
-                            final TopTrack track = new TopTrack(
+                            final TrackSimilar track = new TrackSimilar(
                                     trackData.getName(),
                                     trackData.getmArtist(),
                                     trackData.getUrl(),
@@ -94,7 +95,7 @@ public class LastFMSearchService {
 
     // We need this because sometimes the API returns a null "mbid" identifier value,
     // so we need to search using the artist and the track title.
-    public Flowable<List<TopTrack>> getSimilarTracks(final String artist, final String track){
+    public Flowable<List<TrackSimilar>> getSimilarTracks(final String artist, final String track){
 
         // This returns an observable object that is a list with the results we wanted.
         // flatMap is a rxJava function that applies a function to the given element and returns
@@ -109,13 +110,13 @@ public class LastFMSearchService {
                             SimilarTracksData similarTracksData) throws Exception {
                         return similarTracksData.filterErrors();
                     }
-                }).map(new Function<SimilarTracksData, List<TopTrack>>() {
+                }).map(new Function<SimilarTracksData, List<TrackSimilar>>() {
 
                     @Override
-                    public List<TopTrack> apply(SimilarTracksData similarTracksData) throws Exception {
-                        final ArrayList<TopTrack> similarTracks = new ArrayList<>();
+                    public List<TrackSimilar> apply(SimilarTracksData similarTracksData) throws Exception {
+                        final ArrayList<TrackSimilar> similarTracks = new ArrayList<>();
 
-                        for (TopTrack trackData : similarTracksData.getSimilarTracks().getTrack()){
+                        for (TrackSimilar trackData : similarTracksData.getSimilarTracks().getTrack()){
 
                             ArrayList<Image> trackImages = new ArrayList<>();
 
@@ -125,7 +126,7 @@ public class LastFMSearchService {
                                         imageData.getSize());
                                 trackImages.add(image);
                             }
-                            final TopTrack track = new TopTrack(
+                            final TrackSimilar track = new TrackSimilar(
                                     trackData.getName(),
                                     trackData.getmArtist(),
                                     trackData.getUrl(),

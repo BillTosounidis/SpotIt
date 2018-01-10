@@ -13,17 +13,17 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Locale;
 
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.Track;
+import uom.android.dev.LastFmJson.TopTrack;
 import uom.android.dev.LastFmJson.TrackSimilar;
 import uom.android.dev.R;
 
 /**
- * Created by joanna on 03/08/16.
- * Simple Adapter for Recycler View that contains the similar artist search results.
+ * Created by vasil on 22-Nov-17.
  */
+
 public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapter.TrackViewHolder> {
     private final Context mContext;
     private List<TrackSimilar> trackList;
@@ -69,8 +69,12 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
         final Uri track_uri = (track.getUrl() != null)? Uri.parse(track.getUrl()): null ;
         
         List<Image> images = track.getImage();
-        if (images.size() != 0 && !images.get(1).getText().equals("")) {
-           image_uri  = Uri.parse(images.get(1).getText());
+        if (images.size() != 0){
+            for(Image img : images){
+                if(!img.getText().equals("") && img.getSize().equals("medium")){
+                    image_uri = Uri.parse(img.getText());
+                }
+            }
         }
 
         Picasso.with(mContext).cancelRequest(holder.track_image);
@@ -83,10 +87,14 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
             holder.track_image.setImageResource(R.drawable.ic_info_white_24px);
         }
         
-        holder.track_name.setText(track.getName() + " - " + track.getmArtist().getName());
-        holder.track_image.setContentDescription(track.getName());
+        holder.track_name.setText(String.format(
+                mContext.getString(R.string.similar_track_info),
+                track.getName(), track.getmArtist().getName()));
 
-        holder.track_match.setText(String.format("%d", Math.round(track.getMatch()*100)) + "% Match");
+        holder.track_image.setContentDescription(track.getName());
+        int percentage = Math.round(track.getMatch()*100);
+        holder.track_match.setText(String.format(mContext.getString(R.string.similar_track_percentage), percentage));
+
         holder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

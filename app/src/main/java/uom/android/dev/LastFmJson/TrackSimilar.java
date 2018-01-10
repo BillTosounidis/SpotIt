@@ -58,15 +58,15 @@ public class TrackSimilar extends Track{
         return 0;
     }
 
-    public static final Creator<TopTrack> CREATOR = new Creator<TopTrack>() {
+    public static final Creator<TrackSimilar> CREATOR = new Creator<TrackSimilar>() {
         @Override
-        public TopTrack createFromParcel(Parcel in) {
-            return new TopTrack(in);
+        public TrackSimilar createFromParcel(Parcel in) {
+            return new TrackSimilar(in);
         }
 
         @Override
-        public TopTrack[] newArray(int size) {
-            return new TopTrack[size];
+        public TrackSimilar[] newArray(int size) {
+            return new TrackSimilar[size];
         }
     };
 
