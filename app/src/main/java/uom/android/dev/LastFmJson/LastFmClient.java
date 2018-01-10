@@ -17,7 +17,13 @@ public interface LastFmClient {
     @GET("?method=track.getsimilar&format=json&api_key=" + BuildConfig.LAST_FM_API_KEY)
     Flowable<SimilarTracksData> similarTracksMbid(@Query("mbid") String trackMbid);
 
-    @GET("?method=trac.getsimilar&format=json&api_key=" + BuildConfig.LAST_FM_API_KEY)
+    @GET("?method=track.getsimilar&format=json&api_key=" + BuildConfig.LAST_FM_API_KEY)
     Flowable<SimilarTracksData> similarTracks(@Query("artist") String artistName,
                                               @Query("track") String songTitle);
+
+    @GET("?method=chart.gettoptracks&format=json&api_key=" + BuildConfig.LAST_FM_API_KEY)
+    Flowable<TopTracksData> topTracks();
+
+    @GET("?method=chart.gettopartists&format=json&api_key=" + BuildConfig.LAST_FM_API_KEY)
+    Flowable<TopArtistsData> topArtists();
 }

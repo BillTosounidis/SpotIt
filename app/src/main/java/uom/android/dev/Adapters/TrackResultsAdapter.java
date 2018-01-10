@@ -54,7 +54,7 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
     public TrackViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View itemView = LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.list_item_pagination, parent, false);
+                .inflate(R.layout.track_list_item, parent, false);
 
         return new TrackViewHolder(itemView);
     }

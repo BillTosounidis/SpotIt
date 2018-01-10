@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import java.util.List;
 
 import uom.android.dev.Adapters.TrackResultsAdapter;
 import uom.android.dev.LastFmJson.TrackSearch;
+import uom.android.dev.R;
 
 /**
  * Created by vasil on 16-Nov-17.

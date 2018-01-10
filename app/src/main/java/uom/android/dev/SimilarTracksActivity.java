@@ -1,6 +1,5 @@
 package uom.android.dev;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import uom.android.dev.Fragments.SimilarTracksFragment;
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.TrackSearch;
 
@@ -22,11 +22,17 @@ public class SimilarTracksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_similar_tracks);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Bundle bundle = getIntent().getExtras();
 
+        Bundle bundle = getIntent().getExtras();
         TrackSearch selected_track = bundle.getParcelable(TRACK_ID);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.similar_tracks_toolbar);
+        if(selected_track != null &&
+                !selected_track.getName().equals("")) toolbar.setTitle(selected_track.getName());
+        setSupportActionBar(toolbar);
+
+
+
 
         ImageView trackImage = (ImageView) findViewById(R.id.track_image_imageview);
 

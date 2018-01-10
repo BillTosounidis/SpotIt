@@ -16,11 +16,12 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -42,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         search = findViewById(R.id.searchView);
+        search.setOnClickListener(new SearchView.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                search.setIconified(false);
+            }
+        });
         search.setSearchableInfo(searchManager.getSearchableInfo(
                 new ComponentName(this, SearchActivity.class)));
 
@@ -76,16 +84,20 @@ public class MainActivity extends AppCompatActivity {
         sliderShow = (SliderLayout) findViewById(R.id.slider);
         TextSliderView textSliderView = new TextSliderView(this);
         textSliderView
-                .description("Trap Nation")
-                .image("https://s-media-cache-ak0.pinimg.com/originals/b5/00/17/b500170127c1bbaa9bf0c3ae7c23d2b8.jpg");
+                .description("Eminem")
+                .image("https://lastfm-img2.akamaized.net/i/u/300x300/bb8b499201d70696574bca8e756beb3a.png");
 
         TextSliderView textSliderView1 = new TextSliderView(this);
         textSliderView1
-                .description("Jason Derulo")
-                .image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuZ-YqSLD1MmsKII3niveLkpCMFfBIZL51KXeUn-v9jTeuKTjx");
-
+                .description("Ed Sheeran")
+                .image("https://lastfm-img2.akamaized.net/i/u/300x300/fa36962445080a3357cd1585fd2cb474.png");
+        TextSliderView textSliderView2 = new TextSliderView(this);
+        textSliderView2
+                .description("New Rules\nDua Luppa")
+                .image("https://lastfm-img2.akamaized.net/i/u/300x300/0927c92793fa0e3b97d329813fe4eab1.png");
         sliderShow.addSlider(textSliderView);
         sliderShow.addSlider(textSliderView1);
+        sliderShow.addSlider(textSliderView2);
 
     }
 

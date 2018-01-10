@@ -8,12 +8,12 @@
     <string name="login">Log In</string>
     <string name="songtitle">Song title</string>
     <string name="search_for_similar_songs">Search for similar songs</string>
-    <string name="top_tracks_today">Top Tracks Today</string>
+    <string name="top_artists_chart">Top Artists</string>
     <string name="home">HOME</string>
-    <string name="songs_you_might_like">Songs you might like</string>
+    <string name="top_tracks_chart">Top Tracks</string>
     <string name="song_title_hint">Song Title</string>
     <string name="app_label">Spot it!</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="similar_track_info">%1$s - %2$s</string>
+    <string name="similar_track_percentage">%1$d%% Match</string>
+    <string name="top_track_info"><b>%1$s</b>\n%2$s</string>
 </resources>

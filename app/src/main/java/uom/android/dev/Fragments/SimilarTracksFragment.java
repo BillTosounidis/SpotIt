@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.Fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -22,9 +22,12 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 import uom.android.dev.Adapters.SimilarTrackAdapter;
+import uom.android.dev.LastFMSearchService;
 import uom.android.dev.LastFmJson.Track;
 import uom.android.dev.LastFmJson.TrackSearch;
-import uom.android.dev.LastFmJson.TrackSimilar;
+import uom.android.dev.LastFmJson.TopTrack;
+import uom.android.dev.R;
+import uom.android.dev.SimilarTracksActivity;
 
 
 public class SimilarTracksFragment extends Fragment {
@@ -33,7 +36,7 @@ public class SimilarTracksFragment extends Fragment {
     private static final String LOG_TAG = SimilarTracksFragment.class.getSimpleName();
     private CompositeDisposable mCompositeSubscription;
     private LastFMSearchService searchService;
-    private List<TrackSimilar> mTracks;
+    private List<TopTrack> mTracks;
     private TrackSearch selectedTrack;
     RecyclerView resultsView;
     private SimilarTrackAdapter similarTrackAdapter;
@@ -89,7 +92,7 @@ public class SimilarTracksFragment extends Fragment {
 
         searchService = new LastFMSearchService();
 
-        Flowable<List<TrackSimilar>> fetchDataObservable = null;
+        Flowable<List<TopTrack>> fetchDataObservable = null;
         if(!mbid.equals("")) {
             fetchDataObservable = searchService.getSimilarTracks(mbid);
         }
@@ -102,10 +105,10 @@ public class SimilarTracksFragment extends Fragment {
                 .timeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSubscriber<List<TrackSimilar>>() {
+                .subscribeWith(new DisposableSubscriber<List<TopTrack>>() {
 
                     @Override
-                    public void onNext(List<TrackSimilar> tracks) {
+                    public void onNext(List<TopTrack> tracks) {
 
                         mTracks = tracks;
                         similarTrackAdapter.setTrackList(tracks);

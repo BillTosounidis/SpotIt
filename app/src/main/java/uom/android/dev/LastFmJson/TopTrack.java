@@ -11,46 +11,37 @@ import java.util.List;
  * Created by v4570 on 13/12/17.
  */
 
-public class TrackSimilar extends Track{
+public class TopTrack extends Track{
 
     @SerializedName("artist")
     @Expose
     private Artist mArtist;
-    @SerializedName("match")
-    @Expose
-    private Float match;
-
     @SerializedName("playcount")
     @Expose
-    private Integer mPlaycount;
+    private String mPlaycount;
 
-    public TrackSimilar(){
+    public TopTrack(){
         super();
     }
 
-    public TrackSimilar(String name, Artist mArtist, String url,
-                        String listeners,
-                        List<Image> image, String mbid,
-                        Float match, Integer mPlaycount){
+    public TopTrack(String name, Artist mArtist, String url,
+                    String listeners, List<Image> image, String mbid, String mPlaycount){
         super(name, url, listeners, image, mbid);
         this.mArtist = mArtist;
-        this.match = match;
         this.mPlaycount = mPlaycount;
     }
 
-    private TrackSimilar(Parcel in) {
+    private TopTrack(Parcel in) {
         super(in);
         this.mArtist = in.readParcelable(Artist.class.getClassLoader());
-        this.match = in.readFloat();
-        this.mPlaycount = in.readInt();
+        this.mPlaycount = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.mArtist, flags);
-        dest.writeFloat(this.match);
-        dest.writeInt(this.mPlaycount);
+        dest.writeString(this.mPlaycount);
     }
 
     @Override
@@ -78,17 +69,11 @@ public class TrackSimilar extends Track{
         this.mArtist = artist;
     }
 
-    public Float getMatch(){
-        return match;
-    }
-
-    public void setMatch(Float match){ this.match = match; }
-
-    public Integer getmPlaycount() {
+    public String getmPlaycount() {
         return mPlaycount;
     }
 
-    public void setmPlaycount(Integer mPlaycount) {
+    public void setmPlaycount(String mPlaycount) {
         this.mPlaycount = mPlaycount;
     }
 }
