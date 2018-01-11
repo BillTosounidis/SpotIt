@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="@color/white"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/top_image_imageview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/top_textview"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:gravity="center_vertical"
-        android:background="#AA000000" />
+        xmlns:tools="http://schemas.android.com/tools">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/top_image_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/top_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center_vertical"
+            android:background="#AA000000" />
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

@@ -81,6 +81,10 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.TopT
         holder.track_image.setContentDescription(track.getName());
     }
 
+    public void setTrackList(List<TopTrack> trackList){
+        this.trackList = trackList;
+    }
+
     @Override
     public int getItemCount() {
         return trackList.size();

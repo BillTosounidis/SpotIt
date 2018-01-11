@@ -16,6 +16,7 @@ import uom.android.dev.LastFmJson.SimilarTracksData;
 import uom.android.dev.LastFmJson.TopArtist;
 import uom.android.dev.LastFmJson.TopArtistsData;
 import uom.android.dev.LastFmJson.TopTrack;
+import uom.android.dev.LastFmJson.TopTracksData;
 import uom.android.dev.LastFmJson.TrackSimilar;
 
 /**
@@ -181,6 +182,49 @@ public class LastFMSearchService {
                             topArtists.add(topArtist);
                         }
                         return topArtists;
+                    }
+                });
+    }
+
+    public Flowable<List<TopTrack>> getTopTracks(){
+
+        return lastfmclient.topTracks()
+                .flatMap(new Function<TopTracksData,
+                        Flowable<? extends TopTracksData>>() {
+
+                    @Override
+                    public Flowable<? extends TopTracksData> apply(
+                            TopTracksData topTracksData) throws Exception {
+                        return topTracksData.filterErrors();
+                    }
+                }).map(new Function<TopTracksData, List<TopTrack>>() {
+
+                    @Override
+                    public List<TopTrack> apply(TopTracksData topTracksData) throws Exception {
+                        final ArrayList<TopTrack> topTracks = new ArrayList<>();
+
+                        for (TopTrack trackData : topTracksData.getTracks().getTrack()){
+
+                            ArrayList<Image> trackImages = new ArrayList<>();
+
+                            for(Image imgData : trackData.getImage()){
+                                Image image = new Image(
+                                        imgData.getText(),
+                                        imgData.getSize());
+                                trackImages.add(image);
+                            }
+
+                            final TopTrack topTrack = new TopTrack(
+                                    trackData.getName(),
+                                    trackData.getmArtist(),
+                                    trackData.getUrl(),
+                                    trackData.getListeners(),
+                                    trackImages,
+                                    trackData.getMbid(),
+                                    trackData.getmPlaycount());
+                            topTracks.add(topTrack);
+                        }
+                        return topTracks;
                     }
                 });
     }

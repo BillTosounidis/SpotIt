@@ -22,6 +22,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import uom.android.dev.Fragments.TopArtistsSliderFragment;
+import uom.android.dev.Fragments.TopTracksFragment;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -83,9 +84,12 @@ public class MainActivity extends AppCompatActivity{
         setupDrawerContent(nvDrawer);
 
         TopArtistsSliderFragment topArtistsSliderFragment = new TopArtistsSliderFragment();
+        TopTracksFragment topTracksFragment = new TopTracksFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.sliderContainer, topArtistsSliderFragment).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.topTracks, topTracksFragment).commit();
 
     }
     /*public void selectItemDrawer(MenuItem menuItem){
