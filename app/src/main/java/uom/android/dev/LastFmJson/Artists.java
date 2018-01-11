@@ -8,13 +8,13 @@ public class Artists {
 
 @SerializedName("artist")
 @Expose
-private List<Artist> artist = null;
+private List<TopArtist> artist = null;
 
-public List<Artist> getArtist() {
+public List<TopArtist> getArtist() {
 return artist;
 }
 
-public void setArtist(List<Artist> artist) {
+public void setArtist(List<TopArtist> artist) {
 this.artist = artist;
 }
 

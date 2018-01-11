@@ -9,9 +9,12 @@ import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import uom.android.dev.LastFmJson.Artist;
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.LastFmClient;
 import uom.android.dev.LastFmJson.SimilarTracksData;
+import uom.android.dev.LastFmJson.TopArtist;
+import uom.android.dev.LastFmJson.TopArtistsData;
 import uom.android.dev.LastFmJson.TopTrack;
 import uom.android.dev.LastFmJson.TrackSimilar;
 
@@ -139,6 +142,45 @@ public class LastFMSearchService {
                         }
 
                         return similarTracks;
+                    }
+                });
+    }
+
+    public Flowable<List<TopArtist>> getTopArtists(){
+
+        return lastfmclient.topArtists()
+                .flatMap(new Function<TopArtistsData,
+                        Flowable<? extends TopArtistsData>>() {
+
+                    @Override
+                    public Flowable<? extends TopArtistsData> apply(
+                            TopArtistsData topArtistsData) throws  Exception {
+                        return topArtistsData.filterErrors();
+                    }
+                }).map(new Function<TopArtistsData, List<TopArtist>>() {
+
+                    @Override
+                    public List<TopArtist> apply(TopArtistsData topArtistsData) throws Exception {
+                        final ArrayList<TopArtist> topArtists = new ArrayList<>();
+
+                        for (TopArtist artistData : topArtistsData.getArtists().getArtist()){
+
+                            ArrayList<Image> artistImages = new ArrayList<>();
+
+                            for(Image imgData : artistData.getImage()){
+                                Image image = new Image(
+                                        imgData.getText(),
+                                        imgData.getSize());
+                                artistImages.add(image);
+                            }
+                            final TopArtist topArtist = new TopArtist(
+                                    artistData.getMbid(),
+                                    artistData.getName(),
+                                    artistData.getUrl(),
+                                    artistImages);
+                            topArtists.add(topArtist);
+                        }
+                        return topArtists;
                     }
                 });
     }

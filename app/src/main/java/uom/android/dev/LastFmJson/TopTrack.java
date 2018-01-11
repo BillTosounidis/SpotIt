@@ -20,6 +20,8 @@ public class TopTrack extends Track{
     @Expose
     private String mPlaycount;
 
+    private String mImage;
+
     public TopTrack(){
         super();
     }
@@ -60,6 +62,15 @@ public class TopTrack extends Track{
             return new TopTrack[size];
         }
     };
+
+    private void setmImage(){
+        for(Image img : this.getImage()){
+            if(img.getSize().equals("large")
+                    && !img.getText().equals("")){
+                this.mImage = img.getText();
+            }
+        }
+    }
 
     public Artist getmArtist(){
         return mArtist;

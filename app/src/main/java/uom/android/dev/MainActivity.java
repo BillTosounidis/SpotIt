@@ -21,11 +21,12 @@ import android.view.View;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
+import uom.android.dev.Fragments.TopArtistsSliderFragment;
+
 public class MainActivity extends AppCompatActivity{
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    private SliderLayout sliderShow;
     private SearchView search;
     public static final String EXTRA_MESSAGE = "uom.android.dev.MESSAGE";
 
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
         };
         search.setOnQueryTextListener(queryTextListener);
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
         mDrawerLayout.addDrawerListener(mToggle);
 
@@ -81,32 +82,12 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupDrawerContent(nvDrawer);
 
-        sliderShow = (SliderLayout) findViewById(R.id.slider);
-        TextSliderView textSliderView = new TextSliderView(this);
-        textSliderView
-                .description("Eminem")
-                .image("https://lastfm-img2.akamaized.net/i/u/300x300/bb8b499201d70696574bca8e756beb3a.png");
-
-        TextSliderView textSliderView1 = new TextSliderView(this);
-        textSliderView1
-                .description("Ed Sheeran")
-                .image("https://lastfm-img2.akamaized.net/i/u/300x300/fa36962445080a3357cd1585fd2cb474.png");
-        TextSliderView textSliderView2 = new TextSliderView(this);
-        textSliderView2
-                .description("New Rules\nDua Luppa")
-                .image("https://lastfm-img2.akamaized.net/i/u/300x300/0927c92793fa0e3b97d329813fe4eab1.png");
-        sliderShow.addSlider(textSliderView);
-        sliderShow.addSlider(textSliderView1);
-        sliderShow.addSlider(textSliderView2);
+        TopArtistsSliderFragment topArtistsSliderFragment = new TopArtistsSliderFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.sliderContainer, topArtistsSliderFragment).commit();
 
     }
-
-    @Override
-    protected void onStop() {
-        sliderShow.stopAutoCycle();
-        super.onStop();
-    }
-
     /*public void selectItemDrawer(MenuItem menuItem){
         Fragment myFragment = null;
         Class fragmentClass = null;
