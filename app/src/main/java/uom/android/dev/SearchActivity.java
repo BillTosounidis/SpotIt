@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import uom.android.dev.Fragments.SearchBarFragment;
 import uom.android.dev.Fragments.SongListFragment;
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.ResultsData;
@@ -32,7 +33,7 @@ public class SearchActivity extends AppCompatActivity implements SongListFragmen
         setContentView(R.layout.activity_search);
 
         Intent intent = getIntent();
-        searchQuery = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        searchQuery = intent.getStringExtra(SearchBarFragment.EXTRA_MESSAGE);
         searchTracks(searchQuery);
 
     }
