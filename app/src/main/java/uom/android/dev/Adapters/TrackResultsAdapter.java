@@ -2,6 +2,7 @@ package uom.android.dev.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,14 +33,14 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
         final ImageView track_image;
         final TextView track_title;
         final TextView total_listeners;
-        final LinearLayout element;
+        final CardView element;
 
         public TrackViewHolder(View itemView){
             super(itemView);
             track_image = (ImageView) itemView.findViewById(R.id.track_image_imageview);
             track_title = (TextView) itemView.findViewById(R.id.track_title_textview);
             total_listeners = (TextView) itemView.findViewById(R.id.track_listeners_textview);
-            element = (LinearLayout) itemView;
+            element = (CardView) itemView;
         }
     }
 

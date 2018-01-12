@@ -2,6 +2,7 @@ package uom.android.dev.Adapters;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,14 +35,14 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
         final ImageView track_image;
         final TextView track_name;
         final TextView track_match;
-        final LinearLayout item;
+        final CardView item;
 
         public TrackViewHolder(View itemView) {
             super(itemView);
             track_image = (ImageView) itemView.findViewById(R.id.track_image_imageview);
             track_name = (TextView) itemView.findViewById(R.id.track_name_textview);
             track_match = (TextView) itemView.findViewById(R.id.track_match_textview);
-            item = (LinearLayout) itemView;
+            item = (CardView) itemView;
         }
     }
 
