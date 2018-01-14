@@ -57,27 +57,20 @@ public class MainActivity extends AppCompatActivity{
                 .replace(R.id.searchBarContainer, searchBarFragment).commit();
 
     }
-    /*public void selectItemDrawer(MenuItem menuItem){
-        Fragment myFragment = null;
-        Class fragmentClass = null;
+    public void selectItemDrawer(MenuItem menuItem){
+
         switch (menuItem.getItemId()){
             case R.id.search:
                 Intent i = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(i);
                 break;
+            case R.id.login:
+                Intent i2 = new Intent(MainActivity.this, UserInteractionActivity.class);
+                startActivity(i2);
+                break;
         }
-       *//* try{
-            myFragment = (Fragment) fragmentClass.newInstance();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.drawer, myFragment).commit();
-        menuItem.setChecked(true);
-        setTitle(menuItem.getTitle());
-        mDrawerLayout.closeDrawers();*//*
-    }*/
+        mDrawerLayout.closeDrawers();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -94,6 +87,10 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.search:
                         Intent i = new Intent(MainActivity.this, SearchActivity.class);
                         startActivity(i);
+                        break;
+                    case R.id.login:
+                        Intent i2 = new Intent(MainActivity.this, UserInteractionActivity.class);
+                        startActivity(i2);
                         break;
                 }
 
