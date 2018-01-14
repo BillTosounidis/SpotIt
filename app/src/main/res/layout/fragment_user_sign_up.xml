@@ -85,13 +85,13 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/login_btn"
+            android:id="@+id/signUp_btn"
             android:background="#4DFFFFFF"
             android:textColor="@color/white"
             android:textAllCaps="false"
             android:fontFamily="@font/open_sans_light"
             android:textSize="18sp"
-            android:layout_margin="4dp"
+            android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"/>
