@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
@@ -9,20 +11,27 @@
     android:fitsSystemWindows="true">
     
     <ImageView
-        android:src="@drawable/profile"
+        android:src="@drawable/account_box_outline"
         android:layout_width="75dp"
-        android:layout_height="75dp" />
+        android:layout_height="75dp"
+        tools:ignore="ContentDescription" />
+
     <TextView
+        android:id="@+id/username_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2Bit Bot"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/user_info_username"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"/>
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/user_email_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2bitbot@gmail.com"
-        android:textColor="@color/white"/>
+        android:fontFamily="@font/open_sans_light"
+        android:text="@string/user_email"
+        android:textColor="@color/white" />
 
 </LinearLayout>

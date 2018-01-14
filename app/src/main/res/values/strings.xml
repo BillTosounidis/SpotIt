@@ -15,7 +15,6 @@
     <string name="app_label">Spot it!</string>
     <string name="listeners_info">%1s Listeners</string>
     <string name="similar_track_percentage">%1$d%% Match</string>
-    <string name="top_track_info"><b>%1$s</b>\n%2$s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -25,4 +24,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="favorite_popmenu">Favorite</string>
     <string name="info_popmenu">Info</string>
+    <string name="user_info_username">Username</string>
+    <string name="user_email">user-email@userdomain.com</string>
 </resources>

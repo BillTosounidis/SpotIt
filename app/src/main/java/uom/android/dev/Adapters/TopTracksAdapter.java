@@ -27,12 +27,14 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.TopT
 
     public class TopTrackViewHolder extends RecyclerView.ViewHolder{
         final ImageView track_image;
-        final TextView track_info;
+        final TextView track_title;
+        final TextView track_artist;
 
         public TopTrackViewHolder(View itemView) {
             super(itemView);
             track_image = (ImageView) itemView.findViewById(R.id.top_image_imageview);
-            track_info = (TextView) itemView.findViewById(R.id.top_textview);
+            track_title = (TextView) itemView.findViewById(R.id.top_track_textview);
+            track_artist = (TextView) itemView.findViewById(R.id.top_track_artist_textview);
         }
     }
 
@@ -76,8 +78,8 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.TopT
             holder.track_image.setImageResource(R.drawable.ic_info_white_24px);
         }
 
-        holder.track_info.setText(String.format(mContext.getString(R.string.top_track_info),
-                track.getName(), track.getmArtist().getName()));
+        holder.track_title.setText(track.getName());
+        holder.track_artist.setText(track.getmArtist().getName());
         holder.track_image.setContentDescription(track.getName());
     }
 

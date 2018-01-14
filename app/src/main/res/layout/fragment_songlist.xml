@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background"
-    tools:context="uom.android.dev.Fragments.SongListFragment"
-    android:fitsSystemWindows="true">
+    tools:context="uom.android.dev.Fragments.SongListFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_search_results"
