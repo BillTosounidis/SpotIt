@@ -79,6 +79,10 @@ public class SongListFragment extends Fragment {
         return rootView;
     }
 
+    public void showPopUp(View v){
+        trackAdapter.showPopUp(v);
+    }
+
     @Override
     public void onAttach(Context context){
         super.onAttach(context);

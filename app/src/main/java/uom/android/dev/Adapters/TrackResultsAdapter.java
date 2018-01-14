@@ -5,11 +5,16 @@ import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -33,13 +38,17 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
         final ImageView track_image;
         final TextView track_title;
         final TextView total_listeners;
+        final TextView track_artist;
         final CardView element;
+        final ImageButton popMenu;
 
         public TrackViewHolder(View itemView){
             super(itemView);
             track_image = (ImageView) itemView.findViewById(R.id.track_image_imageview);
             track_title = (TextView) itemView.findViewById(R.id.track_title_textview);
             total_listeners = (TextView) itemView.findViewById(R.id.track_listeners_textview);
+            track_artist = (TextView) itemView.findViewById(R.id.track_artist_textview);
+            popMenu = (ImageButton) itemView.findViewById(R.id.popMenuDots);
             element = (CardView) itemView;
         }
     }
@@ -66,8 +75,8 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
         Uri image_uri = null;
 
         List<Image> images = track.getImage();
-        if (images.size() != 0 && !images.get(1).getText().equals("")){
-            image_uri = Uri.parse(images.get(1).getText());
+        if (images.size() != 0 && !images.get(3).getText().equals("")){
+            image_uri = Uri.parse(images.get(3).getText());
         }
 
         Picasso.with(context).cancelRequest(holder.track_image);
@@ -80,10 +89,12 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
             holder.track_image.setImageResource(R.drawable.ic_info_white_24px);
         }
 
-        holder.track_title.setText(track.getName() + " - " + track.getmArtist());
+        holder.track_title.setText(track.getName());
+        holder.track_artist.setText(track.getmArtist());
         holder.track_image.setContentDescription(track.getName());
 
-        holder.total_listeners.setText(track.getListeners());
+        holder.total_listeners.setText(String.format(context.getString(R.string.listeners_info),
+                track.getListeners()));
         holder.element.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -91,6 +102,15 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
             }
         });
     }
+
+    public void showPopUp(View v){
+        PopupMenu popupMenu = new PopupMenu(context, v);
+        MenuInflater menuInflater = popupMenu.getMenuInflater();
+        menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.show();
+    }
+
+
 
     @Override
     public int getItemCount() {

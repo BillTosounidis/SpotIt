@@ -8,23 +8,16 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardBackgroundColor="#4DFFFFFF"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:padding="5dp"
-        android:baselineAligned="false"
-        android:gravity="center_vertical"
-        android:minHeight="?attr/listPreferredItemHeight"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <FrameLayout
-            android:layout_width="0dp"
+            android:id="@+id/fl_track_image"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:gravity="start">
 
             <ImageView
                 android:id="@+id/track_image_imageview"
@@ -36,30 +29,73 @@
         </FrameLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="4"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp">
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:baselineAligned="false"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/fl_track_image"
+            android:minHeight="?attr/listPreferredItemHeight"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-            <TextView
-                android:id="@+id/track_title_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_semibold"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
-                android:textColor="@color/white" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="4"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
-            <TextView
-                android:id="@+id/track_listeners_textview"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/track_title_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:maxLines="1"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/track_artist_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:layout_margin="3dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:maxLines="1"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/track_listeners_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:fontFamily="@font/open_sans_light"
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/popMenuDots"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_light"
-                android:textAppearance="@android:style/TextAppearance.Material.Large"
-                android:textColor="@color/white" />
+                android:layout_weight="0"
+                android:layout_gravity="center_vertical"
+                android:onClick="showPopUp"
+                android:background="@null"
+                card_view:srcCompat="@drawable/dots_vertical"
+                tools:ignore="ContentDescription" />
+
         </LinearLayout>
+    </RelativeLayout>
 
-    </LinearLayout>
 </android.support.v7.widget.CardView>

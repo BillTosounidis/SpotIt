@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 import uom.android.dev.LastFmJson.Image;
@@ -35,6 +37,7 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
         final ImageView track_image;
         final TextView track_name;
         final TextView track_match;
+        final TextView track_artist;
         final CardView item;
 
         public TrackViewHolder(View itemView) {
@@ -42,6 +45,7 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
             track_image = (ImageView) itemView.findViewById(R.id.track_image_imageview);
             track_name = (TextView) itemView.findViewById(R.id.track_name_textview);
             track_match = (TextView) itemView.findViewById(R.id.track_match_textview);
+            track_artist = (TextView) itemView.findViewById(R.id.track_artist_textview);
             item = (CardView) itemView;
         }
     }
@@ -72,7 +76,7 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
         List<Image> images = track.getImage();
         if (images.size() != 0){
             for(Image img : images){
-                if(!img.getText().equals("") && img.getSize().equals("medium")){
+                if(!img.getText().equals("") && img.getSize().equals("large")){
                     image_uri = Uri.parse(img.getText());
                 }
             }
@@ -88,10 +92,8 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
             holder.track_image.setImageResource(R.drawable.ic_info_white_24px);
         }
         
-        holder.track_name.setText(String.format(
-                mContext.getString(R.string.similar_track_info),
-                track.getName(), track.getmArtist().getName()));
-
+        holder.track_name.setText(track.getName());
+        holder.track_artist.setText(track.getmArtist().getName());
         holder.track_image.setContentDescription(track.getName());
         int percentage = Math.round(track.getMatch()*100);
         holder.track_match.setText(String.format(mContext.getString(R.string.similar_track_percentage), percentage));

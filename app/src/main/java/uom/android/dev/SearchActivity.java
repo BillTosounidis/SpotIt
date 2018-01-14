@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import org.reactivestreams.Subscriber;
@@ -26,6 +27,7 @@ import uom.android.dev.LastFmJson.TrackSearch;
 public class SearchActivity extends AppCompatActivity implements SongListFragment.OnFragmentInteractionListener{
 
     private String searchQuery;
+    private SongListFragment songListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +63,7 @@ public class SearchActivity extends AppCompatActivity implements SongListFragmen
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResultsData>() {
 
-                    SongListFragment songListFragment;
+
 
                     @Override
                     public void onSubscribe(Subscription s) {
@@ -108,6 +110,10 @@ public class SearchActivity extends AppCompatActivity implements SongListFragmen
                                 .commit();
                     }
                 });
+    }
+
+    public void showPopUp(View v){
+        songListFragment.showPopUp(v);
     }
 
     @Override
