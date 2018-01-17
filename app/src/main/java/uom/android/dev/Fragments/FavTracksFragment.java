@@ -1,6 +1,8 @@
 package uom.android.dev.Fragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,7 +45,26 @@ public class FavTracksFragment extends Fragment {
         resultsView.setLayoutManager(layout);
         resultsView.setVisibility(View.GONE);
 
-        favTracksAdapter = new FavTracksAdapter(getActivity(), favTracks);
+        favTracksAdapter = new FavTracksAdapter(getActivity(), favTracks,
+                new FavTracksAdapter.OnItemLongClickListener() {
+                    @Override
+                    public void onItemLongClick(FavTrack track) {
+                        LocalDatabaseManager.getInstance(getActivity()).deleteFavTrack(track);
+                    }
+                }, new FavTracksAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Uri track_uri) {
+                if (track_uri != null) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, track_uri);
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        Log.d(FavTracksFragment.class.getSimpleName(), "Couldn't call " + track_uri.toString()
+                                + ", no receiving apps installed!");
+                    }
+                }
+            }
+        });
         resultsView.setAdapter(favTracksAdapter);
         loadFavTracks();
         return rootView;

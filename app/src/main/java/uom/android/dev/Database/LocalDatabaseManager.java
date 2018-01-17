@@ -14,6 +14,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import uom.android.dev.Fragments.FavTracksFragment;
+import uom.android.dev.LastFmJson.TopTrack;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.LastFmJson.TrackSimilar;
 
@@ -44,7 +45,8 @@ public class LocalDatabaseManager {
                 track.getName(),
                 track.getmArtist().getName(),
                 track.getDesiredImage("large"),
-                track.getMbid()
+                track.getMbid(),
+                track.getUrl()
         );
         Completable.fromAction(new Action() {
             @Override
@@ -75,7 +77,40 @@ public class LocalDatabaseManager {
                 track.getName(),
                 track.getmArtist(),
                 track.getDesiredImage("large"),
-                track.getMbid()
+                track.getMbid(),
+                track.getUrl()
+        );
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                db.favTrackDao().addFavoriteTrack(favTrack);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Toast.makeText(context, "Track saved as favorite.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                getFavTrackToDelete(favTrack.getName(), favTrack.getArtist());
+            }
+        });
+    }
+
+    public void addFavTrackTop(final TopTrack track){
+        final FavTrack favTrack = new FavTrack(
+                track.getName(),
+                track.getmArtist().getName(),
+                track.getDesiredImage("large"),
+                track.getMbid(),
+                track.getUrl()
         );
         Completable.fromAction(new Action() {
             @Override

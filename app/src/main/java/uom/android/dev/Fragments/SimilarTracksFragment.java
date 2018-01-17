@@ -79,8 +79,6 @@ public class SimilarTracksFragment extends Fragment {
             public void onItemLongClick(final TrackSimilar track) {
 
                 LocalDatabaseManager.getInstance(getActivity()).addFavTrackSimilar(track);
-
-                //Toast.makeText(getActivity(), track.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 

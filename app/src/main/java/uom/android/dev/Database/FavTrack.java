@@ -27,13 +27,17 @@ public class FavTrack implements Parcelable {
     @ColumnInfo(name = "track_mbid")
     private String mbid;
 
+    @ColumnInfo(name = "track_uri")
+    private String uri;
+
 
     public FavTrack(String name, String artist, String image,
-                    String mbid){
+                    String mbid, String uri){
         this.name = name;
         this.artist = artist;
         this.image = image;
         this.mbid = mbid;
+        this.uri = uri;
     }
 
     protected FavTrack(Parcel in) {
@@ -42,6 +46,7 @@ public class FavTrack implements Parcelable {
         image = in.readString();
         trackId = in.readInt();
         mbid = in.readString();
+        uri = in.readString();
     }
 
     public static final Creator<FavTrack> CREATOR = new Creator<FavTrack>() {
@@ -88,6 +93,14 @@ public class FavTrack implements Parcelable {
         this.trackId = trackId;
     }
 
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     public String getMbid() {
         return mbid;
     }
@@ -108,5 +121,6 @@ public class FavTrack implements Parcelable {
         dest.writeString(this.image);
         dest.writeInt(this.trackId);
         dest.writeString(this.mbid);
+        dest.writeString(this.uri);
     }
 }
