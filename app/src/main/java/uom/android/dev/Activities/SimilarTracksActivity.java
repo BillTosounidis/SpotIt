@@ -27,7 +27,7 @@ public class SimilarTracksActivity extends AppCompatActivity{
         Bundle bundle = getIntent().getExtras();
         TrackSearch selected_track = bundle.getParcelable(TRACK_ID);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.similar_tracks_toolbar);
+        Toolbar toolbar = findViewById(R.id.similar_tracks_toolbar);
         if(selected_track != null &&
                 !selected_track.getName().equals("")) toolbar.setTitle(selected_track.getName());
         setSupportActionBar(toolbar);
@@ -35,7 +35,7 @@ public class SimilarTracksActivity extends AppCompatActivity{
 
 
 
-        ImageView trackImage = (ImageView) findViewById(R.id.track_image_imageview);
+        ImageView trackImage = findViewById(R.id.track_image_imageview);
 
         if(!selected_track.getImage().isEmpty()){
             List<Image> images = selected_track.getImage();

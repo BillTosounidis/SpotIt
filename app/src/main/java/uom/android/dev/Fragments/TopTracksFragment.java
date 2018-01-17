@@ -50,7 +50,7 @@ public class TopTracksFragment extends Fragment {
 
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.HORIZONTAL);
-        resultsView = (RecyclerView) rootView.findViewById(R.id.topTracksRV);
+        resultsView = rootView.findViewById(R.id.topTracksRV);
         resultsView.setLayoutManager(layout);
         resultsView.setVisibility(View.GONE);
         topTracksAdapter = new TopTracksAdapter(getActivity(), topTracks, new TopTracksAdapter.OnItemClickListener() {

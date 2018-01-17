@@ -45,7 +45,7 @@ public class FavTracksFragment extends Fragment {
 
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.HORIZONTAL);
-        resultsView = (RecyclerView) rootView.findViewById(R.id.favTracksRV);
+        resultsView = rootView.findViewById(R.id.favTracksRV);
         resultsView.setLayoutManager(layout);
         resultsView.setVisibility(View.GONE);
 

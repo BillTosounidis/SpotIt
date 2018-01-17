@@ -86,9 +86,9 @@ public class FavTracksAdapter extends RecyclerView.Adapter<FavTracksAdapter.FavT
 
         public FavTrackViewHolder(View itemView){
             super(itemView);
-            track_image = (ImageView) itemView.findViewById(R.id.fav_image_imageview);
-            track_title = (TextView) itemView.findViewById(R.id.fav_track_artist_textview);
-            track_artist = (TextView) itemView.findViewById(R.id.fav_track_textview);
+            track_image = itemView.findViewById(R.id.fav_image_imageview);
+            track_title = itemView.findViewById(R.id.fav_track_artist_textview);
+            track_artist = itemView.findViewById(R.id.fav_track_textview);
             cardView = (CardView) itemView;
         }
     }

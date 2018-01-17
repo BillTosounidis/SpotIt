@@ -43,10 +43,10 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
 
         public TrackViewHolder(View itemView) {
             super(itemView);
-            track_image = (ImageView) itemView.findViewById(R.id.track_image_imageview);
-            track_name = (TextView) itemView.findViewById(R.id.track_name_textview);
-            track_match = (TextView) itemView.findViewById(R.id.track_match_textview);
-            track_artist = (TextView) itemView.findViewById(R.id.track_artist_textview);
+            track_image = itemView.findViewById(R.id.track_image_imageview);
+            track_name = itemView.findViewById(R.id.track_name_textview);
+            track_match = itemView.findViewById(R.id.track_match_textview);
+            track_artist = itemView.findViewById(R.id.track_artist_textview);
             item = (CardView) itemView;
         }
     }

@@ -43,7 +43,7 @@ public class TopArtistsSliderFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_top_artists_slider, container, false);
         mCompositeSubscription = new CompositeDisposable();
-        sliderShow = (SliderLayout) rootView.findViewById(R.id.top_artists_slider);
+        sliderShow = rootView.findViewById(R.id.top_artists_slider);
         sliderShow.setPresetIndicator(SliderLayout.PresetIndicators.Center_Top);
         loadTopArtists();
         return rootView;

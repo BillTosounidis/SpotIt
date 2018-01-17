@@ -57,7 +57,7 @@ public class SongListFragment extends Fragment {
 
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.VERTICAL);
-        RecyclerView resultsView = (RecyclerView) rootView.findViewById(R.id.list_search_results);
+        RecyclerView resultsView = rootView.findViewById(R.id.list_search_results);
         resultsView.setHasFixedSize(true);
         resultsView.setLayoutManager(layout);
 

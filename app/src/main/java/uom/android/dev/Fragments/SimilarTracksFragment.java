@@ -56,7 +56,7 @@ public class SimilarTracksFragment extends Fragment {
 
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.VERTICAL);
-        resultsView = (RecyclerView) rootView.findViewById(R.id.list_similar_tracks);
+        resultsView = rootView.findViewById(R.id.list_similar_tracks);
         resultsView.setHasFixedSize(true);
         resultsView.setLayoutManager(layout);
         resultsView.setVisibility(View.GONE);

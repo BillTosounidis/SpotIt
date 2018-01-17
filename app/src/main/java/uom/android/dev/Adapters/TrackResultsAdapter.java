@@ -35,10 +35,10 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
 
         public TrackViewHolder(View itemView){
             super(itemView);
-            track_image = (ImageView) itemView.findViewById(R.id.track_image_imageview);
-            track_title = (TextView) itemView.findViewById(R.id.track_title_textview);
-            total_listeners = (TextView) itemView.findViewById(R.id.track_listeners_textview);
-            track_artist = (TextView) itemView.findViewById(R.id.track_artist_textview);
+            track_image = itemView.findViewById(R.id.track_image_imageview);
+            track_title = itemView.findViewById(R.id.track_title_textview);
+            total_listeners = itemView.findViewById(R.id.track_listeners_textview);
+            track_artist = itemView.findViewById(R.id.track_artist_textview);
             element = (CardView) itemView;
         }
     }
