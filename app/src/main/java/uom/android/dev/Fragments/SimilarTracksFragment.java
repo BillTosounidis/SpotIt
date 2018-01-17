@@ -26,11 +26,12 @@ import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 import uom.android.dev.Adapters.SimilarTrackAdapter;
+import uom.android.dev.Database.LocalDatabaseManager;
 import uom.android.dev.LastFMSearchService;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.LastFmJson.TrackSimilar;
-import uom.android.dev.Persistence.Database;
-import uom.android.dev.Persistence.FavTrack;
+import uom.android.dev.Database.Database;
+import uom.android.dev.Database.FavTrack;
 import uom.android.dev.R;
 import uom.android.dev.Activities.SimilarTracksActivity;
 
@@ -77,34 +78,7 @@ public class SimilarTracksFragment extends Fragment {
             @Override
             public void onItemLongClick(final TrackSimilar track) {
 
-                Completable.fromAction(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        FavTrack favTrack = new FavTrack(
-                                track.getName(),
-                                track.getmArtist().getName(),
-                                track.getDesiredImage("large"),
-                                track.getMbid()
-                        );
-                        Database.getInstance(getActivity()).favTrackDao().addFavoriteTrack(favTrack);
-                    }
-                }).observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Toast.makeText(getActivity(), "Track saved.", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(getActivity(), "Error saving.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                LocalDatabaseManager.getInstance(getActivity()).addFavTrackSimilar(track);
 
                 //Toast.makeText(getActivity(), track.getName(), Toast.LENGTH_SHORT).show();
             }

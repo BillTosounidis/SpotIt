@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uom.android.dev.Adapters.TrackResultsAdapter;
+import uom.android.dev.Database.LocalDatabaseManager;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.R;
 
@@ -63,10 +64,15 @@ public class SongListFragment extends Fragment {
         trackAdapter = new TrackResultsAdapter(getActivity(), tracks, new TrackResultsAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(TrackSearch track) {
-                if (track != null){
+                if (track != null) {
                     listener = ((OnFragmentInteractionListener) getActivity());
                     listener.onItemSelected(track);
                 }
+            }
+        }, new TrackResultsAdapter.OnLongClickListener() {
+            @Override
+            public void onLongItemClick(TrackSearch track) {
+                LocalDatabaseManager.getInstance(getActivity()).addFavTrack(track);
             }
         });
 

@@ -15,7 +15,6 @@ import uom.android.dev.Activities.SearchActivity;
 import uom.android.dev.Fragments.SearchBarFragment;
 import uom.android.dev.Fragments.TopArtistsSliderFragment;
 import uom.android.dev.Fragments.TopTracksFragment;
-import uom.android.dev.Persistence.Database;
 
 public class MainActivity extends AppCompatActivity{
 

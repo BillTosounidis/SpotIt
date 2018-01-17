@@ -1,4 +1,4 @@
-package uom.android.dev.Persistence;
+package uom.android.dev.Database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

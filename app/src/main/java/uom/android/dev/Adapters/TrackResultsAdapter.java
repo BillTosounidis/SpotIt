@@ -5,16 +5,10 @@ import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,15 +18,13 @@ import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.R;
 
-/**
- * Created by vasil on 22-Nov-17.
- */
 
 public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapter.TrackViewHolder> {
 
     private final Context context;
     private List<TrackSearch> values;
     private final OnItemClickListener listener;
+    private final OnLongClickListener longClickListener;
 
     public class TrackViewHolder extends RecyclerView.ViewHolder {
         final ImageView track_image;
@@ -51,11 +43,12 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
         }
     }
 
-    public TrackResultsAdapter(Context context, List<TrackSearch> values, OnItemClickListener listener){
+    public TrackResultsAdapter(Context context, List<TrackSearch> values, OnItemClickListener listener, OnLongClickListener longClickListener){
 
         this.context = context;
         this.values = values;
         this.listener = listener;
+        this.longClickListener = longClickListener;
     }
 
     @Override
@@ -101,6 +94,14 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
                 listener.onItemClick(track);
             }
         });
+
+        holder.element.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                longClickListener.onLongItemClick(track);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -117,5 +118,9 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
 
     public interface OnItemClickListener {
         void onItemClick(TrackSearch track);
+    }
+
+    public interface OnLongClickListener {
+        void onLongItemClick(TrackSearch track);
     }
 }
