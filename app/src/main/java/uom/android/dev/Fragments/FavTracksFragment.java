@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import uom.android.dev.Adapters.FavTracksAdapter;
@@ -28,6 +29,7 @@ public class FavTracksFragment extends Fragment {
     private List<FavTrack> favTracks;
     private FavTracksAdapter favTracksAdapter;
     private RecyclerView resultsView;
+    private CompositeDisposable mCompositeSubscription;
 
     public FavTracksFragment() {
         // Required empty public constructor
@@ -38,6 +40,8 @@ public class FavTracksFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_fav_tracks, container, false);
+
+        mCompositeSubscription = new CompositeDisposable();
 
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -66,25 +70,36 @@ public class FavTracksFragment extends Fragment {
             }
         });
         resultsView.setAdapter(favTracksAdapter);
-        loadFavTracks();
         return rootView;
     }
 
-    private void loadFavTracks(){
-        LocalDatabaseManager.getInstance(getActivity()).getDb().favTrackDao()
+    @Override
+    public void onStart(){
+        super.onStart();
+        mCompositeSubscription.add(LocalDatabaseManager.getInstance(getActivity()).getDb().favTrackDao()
                 .getFavoriteTracks().observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<List<FavTrack>>() {
                     @Override
                     public void accept(List<FavTrack> favTracks) throws Exception {
-                        handleResponse(favTracks);
+                        favTracksAdapter.setFavTracks(favTracks);
+                        favTracksAdapter.notifyDataSetChanged();
                         resultsView.setVisibility(View.VISIBLE);
                     }
-                });
+                }));
     }
 
-    private void handleResponse(List<FavTrack> favTracks){
-        favTracksAdapter.setFavTracks(favTracks);
+    @Override
+    public void onStop(){
+        super.onStop();
+
+        mCompositeSubscription.clear();
+    }
+
+    @Override
+    public void onDestroy(){
+        mCompositeSubscription.dispose();
+        super.onDestroy();
     }
 
 }

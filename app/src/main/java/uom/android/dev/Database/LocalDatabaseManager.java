@@ -173,17 +173,6 @@ public class LocalDatabaseManager {
                 });
     }
 
-    public void getFavTracks(){
-        db.favTrackDao().getFavoriteTracks().observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<List<FavTrack>>() {
-                    @Override
-                    public void accept(List<FavTrack> favTracks) throws Exception {
-
-                    }
-                });
-    }
-
     public Database getDb(){
         return db;
     }
