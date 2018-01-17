@@ -72,7 +72,6 @@ public class TopTracksFragment extends Fragment {
                 LocalDatabaseManager.getInstance(getActivity()).addFavTrackTop(track);
             }
         });
-        //TODO: onItemClickListener
 
         resultsView.setAdapter(topTracksAdapter);
         loadTopTracks();

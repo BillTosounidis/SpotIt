@@ -2,34 +2,22 @@
     <string name="app_name">Spot It!</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="search">Search</string>
-    <string name="settings">Settings</string>
     <string name="about">About</string>
     <string name="login">Log In</string>
     <string name="songtitle">Song title</string>
     <string name="search_for_similar_songs">Search for similar songs</string>
     <string name="top_artists_chart">Top Artists</string>
-    <string name="home">HOME</string>
     <string name="top_tracks_chart">Top Tracks</string>
     <string name="song_title_hint">Song Title</string>
     <string name="app_label">Spot it!</string>
     <string name="listeners_info">%1s Listeners</string>
     <string name="similar_track_percentage">%1$d%% Match</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="title_activity_track_info">TrackInfoActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="favorite_popmenu">Favorite</string>
-    <string name="info_popmenu">Info</string>
-    <string name="user_info_username">Username</string>
-    <string name="user_email">user-email@userdomain.com</string>
-    <string name="sign_up_text">Don\'t have one yet? Sign up here.</string>
-    <string name="login_text">Login</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="password">Password</string>
-    <string name="username">Username</string>
     <string name="fav_tracks">Favorite Tracks</string>
+    <string name="description">SpotIt! is an Android app that helps you find similar songs to the ones you like.\nJust search for a song and get all the similar tracks for it based on the LastFM API.</string>
+    <string name="powered_by">Powered By</string>
+    <string name="share">Share App</string>
+    <string name="search">Search</string>
+    <string name="home">HOME</string>
+    <string name="search_results">Search Results</string>
 </resources>

@@ -50,6 +50,9 @@
         <activity
             android:name=".Activities.SimilarTracksActivity"
             android:parentActivityName=".MainActivity" />
+        <activity android:name=".Activities.AboutActivity"
+            android:parentActivityName=".MainActivity">
+        </activity>
     </application>
 
 </manifest>
