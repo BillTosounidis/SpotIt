@@ -15,19 +15,24 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 import uom.android.dev.Adapters.SimilarTrackAdapter;
 import uom.android.dev.LastFMSearchService;
-import uom.android.dev.LastFmJson.Track;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.LastFmJson.TrackSimilar;
+import uom.android.dev.Persistence.Database;
+import uom.android.dev.Persistence.FavTrack;
 import uom.android.dev.R;
-import uom.android.dev.SimilarTracksActivity;
+import uom.android.dev.Activities.SimilarTracksActivity;
 
 
 public class SimilarTracksFragment extends Fragment {
@@ -70,8 +75,38 @@ public class SimilarTracksFragment extends Fragment {
             }
         }, new SimilarTrackAdapter.OnItemLongClickListener() {
             @Override
-            public void onItemLongClick(Track track) {
-                Toast.makeText(getActivity(), "SAVED", Toast.LENGTH_SHORT).show();
+            public void onItemLongClick(final TrackSimilar track) {
+
+                Completable.fromAction(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        FavTrack favTrack = new FavTrack(
+                                track.getName(),
+                                track.getmArtist().getName(),
+                                track.getDesiredImage("large"),
+                                track.getMbid()
+                        );
+                        Database.getInstance(getActivity()).favTrackDao().addFavoriteTrack(favTrack);
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Toast.makeText(getActivity(), "Track saved.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(getActivity(), "Error saving.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //Toast.makeText(getActivity(), track.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -12,9 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import uom.android.dev.MainActivity;
 import uom.android.dev.R;
-import uom.android.dev.SearchActivity;
+import uom.android.dev.Activities.SearchActivity;
 
 
 public class SearchBarFragment extends Fragment {

@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.Activities;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -8,7 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import org.reactivestreams.Subscriber;
@@ -20,9 +23,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import uom.android.dev.Fragments.SearchBarFragment;
 import uom.android.dev.Fragments.SongListFragment;
+import uom.android.dev.LastFMSearchService;
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.ResultsData;
 import uom.android.dev.LastFmJson.TrackSearch;
+import uom.android.dev.R;
 
 public class SearchActivity extends AppCompatActivity implements SongListFragment.OnFragmentInteractionListener{
 
@@ -110,10 +115,6 @@ public class SearchActivity extends AppCompatActivity implements SongListFragmen
                                 .commit();
                     }
                 });
-    }
-
-    public void showPopUp(View v){
-        songListFragment.showPopUp(v);
     }
 
     @Override

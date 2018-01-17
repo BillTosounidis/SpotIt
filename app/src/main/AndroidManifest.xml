@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/DefaultTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activities.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".SearchActivity"
+            android:name=".Activities.SearchActivity"
             android:parentActivityName=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -48,12 +48,8 @@
                 android:value="@xml/searchable" />
         </activity>
         <activity
-            android:name=".SimilarTracksActivity"
+            android:name=".Activities.SimilarTracksActivity"
             android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".UserInteractionActivity"
-            android:parentActivityName=".MainActivity">
-        </activity>
     </application>
 
 </manifest>

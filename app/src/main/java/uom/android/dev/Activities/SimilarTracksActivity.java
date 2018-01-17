@@ -1,4 +1,4 @@
-package uom.android.dev;
+package uom.android.dev.Activities;
 
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +13,9 @@ import java.util.List;
 import uom.android.dev.Fragments.SimilarTracksFragment;
 import uom.android.dev.LastFmJson.Image;
 import uom.android.dev.LastFmJson.TrackSearch;
+import uom.android.dev.R;
 
-public class SimilarTracksActivity extends AppCompatActivity {
+public class SimilarTracksActivity extends AppCompatActivity{
     public static final String TRACK_ID = "mbid";
     public static final String TRACK_TAG = "selected";
 

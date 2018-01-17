@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,6 @@ import uom.android.dev.Adapters.TrackResultsAdapter;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.R;
 
-/**
- * Created by vasil on 16-Nov-17.
- */
 
 public class SongListFragment extends Fragment {
 
@@ -27,6 +25,7 @@ public class SongListFragment extends Fragment {
     private static final String TRACK_KEY = "tracks";
     private List<TrackSearch> tracks;
     private OnFragmentInteractionListener listener;
+    private ImageButton showPopUp;
 
     public SongListFragment(){
         // We need this empty constructor.
@@ -71,16 +70,9 @@ public class SongListFragment extends Fragment {
             }
         });
 
-
-
         resultsView.setAdapter(trackAdapter);
 
-
         return rootView;
-    }
-
-    public void showPopUp(View v){
-        trackAdapter.showPopUp(v);
     }
 
     @Override

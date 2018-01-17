@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -134,6 +135,6 @@ public class SimilarTrackAdapter extends RecyclerView.Adapter<SimilarTrackAdapte
     }
 
     public interface OnItemLongClickListener {
-        void onItemLongClick(Track track);
+        void onItemLongClick(TrackSimilar track);
     }
 }

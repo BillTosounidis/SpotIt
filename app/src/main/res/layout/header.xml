@@ -1,37 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
     android:layout_alignParentTop="true"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/colorGradientEnd"
     android:padding="15dp"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:elevation="4dp">
     
     <ImageView
-        android:src="@drawable/account_box_outline"
+        android:src="@drawable/ic_app_logo"
         android:layout_width="75dp"
         android:layout_height="75dp"
+        android:layout_gravity="bottom"
         tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/username_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/open_sans_semibold"
-        android:text="@string/user_info_username"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/user_email_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/open_sans_light"
-        android:text="@string/user_email"
-        android:textColor="@color/white" />
-
-</LinearLayout>
+</FrameLayout>

@@ -6,16 +6,19 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.UUID;
 
-/**
- * Created by v4570 on 13/12/17.
- */
 
 public class TopTrack extends Track{
+
+
+    private String topTrackId;
 
     @SerializedName("artist")
     @Expose
     private Artist mArtist;
+
+
     @SerializedName("playcount")
     @Expose
     private String mPlaycount;
@@ -31,12 +34,15 @@ public class TopTrack extends Track{
         super(name, url, listeners, image, mbid);
         this.mArtist = mArtist;
         this.mPlaycount = mPlaycount;
+        this.setmImage();
+        this.setTopTrackId();
     }
 
     private TopTrack(Parcel in) {
         super(in);
         this.mArtist = in.readParcelable(Artist.class.getClassLoader());
         this.mPlaycount = in.readString();
+        this.topTrackId = in.readString();
     }
 
     @Override
@@ -72,6 +78,10 @@ public class TopTrack extends Track{
         }
     }
 
+    private void setTopTrackId(){
+        this.topTrackId = UUID.randomUUID().toString();
+    }
+
     public Artist getmArtist(){
         return mArtist;
     }
@@ -86,5 +96,14 @@ public class TopTrack extends Track{
 
     public void setmPlaycount(String mPlaycount) {
         this.mPlaycount = mPlaycount;
+    }
+
+
+    public String getTopTrackId() {
+        return topTrackId;
+    }
+
+    public String getmImage() {
+        return mImage;
     }
 }

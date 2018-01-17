@@ -10,12 +10,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
+import uom.android.dev.Activities.SearchActivity;
 import uom.android.dev.Fragments.SearchBarFragment;
 import uom.android.dev.Fragments.TopArtistsSliderFragment;
 import uom.android.dev.Fragments.TopTracksFragment;
+import uom.android.dev.Persistence.Database;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity{
 
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.main_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
@@ -64,10 +62,6 @@ public class MainActivity extends AppCompatActivity{
                 Intent i = new Intent(MainActivity.this, SearchActivity.class);
                 startActivity(i);
                 break;
-            case R.id.login:
-                Intent i2 = new Intent(MainActivity.this, UserInteractionActivity.class);
-                startActivity(i2);
-                break;
         }
         mDrawerLayout.closeDrawers();
     }
@@ -87,10 +81,6 @@ public class MainActivity extends AppCompatActivity{
                     case R.id.search:
                         Intent i = new Intent(MainActivity.this, SearchActivity.class);
                         startActivity(i);
-                        break;
-                    case R.id.login:
-                        Intent i2 = new Intent(MainActivity.this, UserInteractionActivity.class);
-                        startActivity(i2);
                         break;
                 }
 

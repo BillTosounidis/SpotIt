@@ -59,14 +59,7 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.TopT
         Uri image_uri = null;
         final Uri track_uri = (track.getUrl() != null)? Uri.parse(track.getUrl()): null;
 
-        List<Image> images = track.getImage();
-        if (images.size() != 0){
-            for(Image img : images){
-                if(!img.getText().equals("") && img.getSize().equals("large")){
-                    image_uri = Uri.parse(img.getText());
-                }
-            }
-        }
+        image_uri = Uri.parse(track.getmImage());
 
         Picasso.with(mContext).cancelRequest(holder.track_image);
         if (image_uri != null){

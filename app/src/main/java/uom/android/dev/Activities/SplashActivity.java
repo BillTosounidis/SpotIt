@@ -1,9 +1,11 @@
-package uom.android.dev;
+package uom.android.dev.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import uom.android.dev.MainActivity;
 
 /**
  * Created by vasil on 15-Nov-17.

@@ -13,9 +13,11 @@ public class Track implements Parcelable{
     @SerializedName("name")
     @Expose
     private String name;
+
     @SerializedName("url")
     @Expose
     private String url;
+
     @SerializedName("listeners")
     @Expose
     private String listeners;
@@ -23,12 +25,14 @@ public class Track implements Parcelable{
     @SerializedName("image")
     @Expose
     private List<Image> image = new ArrayList<>();
+
     @SerializedName("mbid")
     @Expose
     private String mbid;
+
     @Expose
     private String mediumImage;
-
+    
     public Track(){
     }
 
@@ -116,6 +120,17 @@ public class Track implements Parcelable{
                this.mediumImage = img.getText();
            }
         }
+    }
+
+    public String getDesiredImage(String size){
+        String desiredImage = null;
+        for(Image img: image){
+            if(img.getSize().equals(size)
+                    && !img.getText().equals("")){
+                desiredImage = img.getText();
+            }
+        }
+        return desiredImage;
     }
 
     @Override

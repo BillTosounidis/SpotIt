@@ -40,7 +40,6 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
         final TextView total_listeners;
         final TextView track_artist;
         final CardView element;
-        final ImageButton popMenu;
 
         public TrackViewHolder(View itemView){
             super(itemView);
@@ -48,7 +47,6 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
             track_title = (TextView) itemView.findViewById(R.id.track_title_textview);
             total_listeners = (TextView) itemView.findViewById(R.id.track_listeners_textview);
             track_artist = (TextView) itemView.findViewById(R.id.track_artist_textview);
-            popMenu = (ImageButton) itemView.findViewById(R.id.popMenuDots);
             element = (CardView) itemView;
         }
     }
@@ -95,6 +93,8 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
 
         holder.total_listeners.setText(String.format(context.getString(R.string.listeners_info),
                 track.getListeners()));
+
+
         holder.element.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -102,15 +102,6 @@ public class TrackResultsAdapter extends RecyclerView.Adapter<TrackResultsAdapte
             }
         });
     }
-
-    public void showPopUp(View v){
-        PopupMenu popupMenu = new PopupMenu(context, v);
-        MenuInflater menuInflater = popupMenu.getMenuInflater();
-        menuInflater.inflate(R.menu.popup_menu, popupMenu.getMenu());
-        popupMenu.show();
-    }
-
-
 
     @Override
     public int getItemCount() {
