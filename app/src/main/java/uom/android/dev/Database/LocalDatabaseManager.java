@@ -4,6 +4,8 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.util.List;
+
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -11,6 +13,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import uom.android.dev.Fragments.FavTracksFragment;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.LastFmJson.TrackSimilar;
 
@@ -133,5 +136,20 @@ public class LocalDatabaseManager {
                         deleteFavTrack(favTrack);
                     }
                 });
+    }
+
+    public void getFavTracks(){
+        db.favTrackDao().getFavoriteTracks().observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<List<FavTrack>>() {
+                    @Override
+                    public void accept(List<FavTrack> favTracks) throws Exception {
+
+                    }
+                });
+    }
+
+    public Database getDb(){
+        return db;
     }
 }

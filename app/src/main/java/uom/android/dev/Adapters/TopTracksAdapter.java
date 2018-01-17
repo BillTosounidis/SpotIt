@@ -57,7 +57,6 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.TopT
     public void onBindViewHolder(TopTrackViewHolder holder, int position) {
         final TopTrack track = trackList.get(position);
         Uri image_uri = null;
-        final Uri track_uri = (track.getUrl() != null)? Uri.parse(track.getUrl()): null;
 
         image_uri = Uri.parse(track.getmImage());
 

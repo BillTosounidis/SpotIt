@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import uom.android.dev.Activities.SearchActivity;
+import uom.android.dev.Fragments.FavTracksFragment;
 import uom.android.dev.Fragments.SearchBarFragment;
 import uom.android.dev.Fragments.TopArtistsSliderFragment;
 import uom.android.dev.Fragments.TopTracksFragment;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity{
         TopArtistsSliderFragment topArtistsSliderFragment = new TopArtistsSliderFragment();
         TopTracksFragment topTracksFragment = new TopTracksFragment();
         SearchBarFragment searchBarFragment = new SearchBarFragment();
+        FavTracksFragment favTracksFragment = new FavTracksFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.sliderContainer, topArtistsSliderFragment).commit();
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity{
                 .replace(R.id.topTracks, topTracksFragment).commit();
         fragmentManager.beginTransaction()
                 .replace(R.id.searchBarContainer, searchBarFragment).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.favTracks, favTracksFragment).commit();
 
     }
     public void selectItemDrawer(MenuItem menuItem){
