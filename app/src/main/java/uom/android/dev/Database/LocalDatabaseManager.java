@@ -9,6 +9,7 @@ import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import uom.android.dev.LastFmJson.TrackSearch;
 import uom.android.dev.LastFmJson.TrackSimilar;
@@ -36,15 +37,15 @@ public class LocalDatabaseManager {
     }
 
     public void addFavTrackSimilar(final TrackSimilar track){
+        final FavTrack favTrack = new FavTrack(
+                track.getName(),
+                track.getmArtist().getName(),
+                track.getDesiredImage("large"),
+                track.getMbid()
+        );
         Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
-                FavTrack favTrack = new FavTrack(
-                        track.getName(),
-                        track.getmArtist().getName(),
-                        track.getDesiredImage("large"),
-                        track.getMbid()
-                );
                 db.favTrackDao().addFavoriteTrack(favTrack);
             }
         }).observeOn(AndroidSchedulers.mainThread())
@@ -61,21 +62,21 @@ public class LocalDatabaseManager {
 
             @Override
             public void onError(Throwable e) {
-                Toast.makeText(context, "Error saving.", Toast.LENGTH_SHORT).show();
+                getFavTrackToDelete(favTrack.getName(), favTrack.getArtist());
             }
         });
     }
 
     public void addFavTrack(final TrackSearch track){
+        final FavTrack favTrack = new FavTrack(
+                track.getName(),
+                track.getmArtist(),
+                track.getDesiredImage("large"),
+                track.getMbid()
+        );
         Completable.fromAction(new Action() {
             @Override
             public void run() throws Exception {
-                FavTrack favTrack = new FavTrack(
-                        track.getName(),
-                        track.getmArtist(),
-                        track.getDesiredImage("large"),
-                        track.getMbid()
-                );
                 db.favTrackDao().addFavoriteTrack(favTrack);
             }
         }).observeOn(AndroidSchedulers.mainThread())
@@ -92,9 +93,45 @@ public class LocalDatabaseManager {
 
             @Override
             public void onError(Throwable e) {
-                Toast.makeText(context, "Error saving.", Toast.LENGTH_SHORT).show();
+                getFavTrackToDelete(favTrack.getName(), favTrack.getArtist());
             }
         });
     }
 
+    public void deleteFavTrack(final FavTrack favTrack){
+
+        Completable.fromAction(new Action() {
+            @Override
+            public void run() throws Exception {
+                db.favTrackDao().deleteFavoriteTrack(favTrack);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Toast.makeText(context, "Track removed from favorites.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(context, "Error removing track from favorites.", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void getFavTrackToDelete(final String trackName, final String trackArtist){
+        db.favTrackDao().getFavoriteTrack(trackName, trackArtist).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<FavTrack>() {
+                    @Override
+                    public void accept(FavTrack favTrack) throws Exception {
+                        deleteFavTrack(favTrack);
+                    }
+                });
+    }
 }

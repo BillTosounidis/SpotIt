@@ -2,11 +2,13 @@ package uom.android.dev.Database;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-@Entity(tableName = "favorite_tracks")
+@Entity(tableName = "favorite_tracks",
+        indices = @Index(value = {"track_name", "track_artist"}, unique = true))
 public class FavTrack implements Parcelable {
 
     @ColumnInfo(name = "track_name")

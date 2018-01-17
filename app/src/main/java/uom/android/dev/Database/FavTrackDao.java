@@ -9,6 +9,7 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 
 @Dao
 public interface FavTrackDao {
@@ -16,7 +17,10 @@ public interface FavTrackDao {
     @Query("SELECT * FROM FAVORITE_TRACKS")
     Flowable<List<FavTrack>> getFavoriteTracks();
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Query("SELECT * FROM FAVORITE_TRACKS WHERE track_name = :trackName AND track_artist = :trackArtist")
+    Maybe<FavTrack> getFavoriteTrack(String trackName, String trackArtist);
+
+    @Insert(onConflict = OnConflictStrategy.FAIL)
     void addFavoriteTrack(FavTrack track);
 
     @Delete
