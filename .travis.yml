@@ -3,8 +3,6 @@ dist: trusty
 
 jdk: oraclejdk8
 
-script: "./gradlew clean assembleDebug"
-
 android:
   components:
       - platform-tools
@@ -12,3 +10,5 @@ android:
       - build-tools-26.0.2
       - android-26
       - extra-android-m2repository
+
+script: ./gradlew connectedAndroidTest
