@@ -20,8 +20,6 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'LAST_FM_API_KEY', LastFMApiKey
         it.buildConfigField 'String', 'LAST_FM_BASE_URL', LastFMBaseURL
-        it.buildConfigField 'String', 'SPOTIFY_CLIENT_SECRET', SpotifyClientSecret
-        it.buildConfigField 'String', 'SPOTIFY_CLIENT_ID', SpotifyClientID
     }
 }
 
